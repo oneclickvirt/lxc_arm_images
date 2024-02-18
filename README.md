@@ -1,5 +1,7 @@
 # lxc_arm_images
 
+[![Build LXC ARM images](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/main.yml/badge.svg)](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/main.yml)
+
 ## 上传到对应release
 
 ```
