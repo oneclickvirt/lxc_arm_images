@@ -44,9 +44,5 @@ jenkins_urls=(
 )
 
 for jenkins_url in "${jenkins_urls[@]}"; do
-    if [[ $jenkins_url == *"openwrt"* ]]; then
-        download_images "$jenkins_url" "arm64"
-    elif [[ $jenkins_url == *"oracle"* ]]; then
-        download_images "$jenkins_url" "arm64"
-    fi
+    download_images "$jenkins_url" "arm64"
 done
