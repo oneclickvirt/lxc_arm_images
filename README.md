@@ -2,6 +2,12 @@
 
 [![Build LXC ARM images](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/main.yml/badge.svg)](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/main.yml)
 
+## 说明
+
+重命名后保存的镜像列表：https://raw.githubusercontent.com/oneclickvirt/lxc_arm_images/main/fixed_images.txt
+
+默认已安装cloud-init，但其余均未设置
+
 ## 上传到对应release
 
 ```
