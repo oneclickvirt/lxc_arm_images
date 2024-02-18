@@ -7,11 +7,12 @@
 download_images() {
     local jenkins_url="$1"
     local architecture="$2"
+    local variant="$3"
     local urls=()
     local arm64_urls=()
     urls=($(curl -s "$jenkins_url/api/xml" | grep -oP '<url>.*?</url>' | grep -oP 'https://.*?(?=<\/url>)'))
     for url in "${urls[@]}"; do
-        if [[ $url == *"$architecture"* ]]; then
+        if [[ $url == *"$architecture"* && $url == *"$variant"* ]]; then
             url="${url}lastSuccessfulBuild/artifact/rootfs.tar.xz"
             arm64_urls+=("$url")
         fi
@@ -19,7 +20,6 @@ download_images() {
     for url in "${arm64_urls[@]}"; do
         system=$(echo "$url" | sed 's/.*image-\([^\/]*\)\/.*/\1/')
         release=$(echo "$url" | grep -oP 'release=\K[^,&]+')
-        variant=$(echo "$url" | grep -oP 'variant=\K[^/&]+')
         new_filename="${system}-${architecture}-${release}-${variant}.tar.xz"
         echo "Downloading $url as $new_filename..."
         curl -o "$new_filename" -L "$url"
@@ -44,5 +44,5 @@ jenkins_urls=(
 )
 
 for jenkins_url in "${jenkins_urls[@]}"; do
-    download_images "$jenkins_url" "arm64"
+    download_images "$jenkins_url" "arm64" "cloud"
 done
