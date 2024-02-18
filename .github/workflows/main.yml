@@ -24,11 +24,11 @@ jobs:
         curl -o run.sh https://raw.githubusercontent.com/oneclickvirt/lxc_arm_images/main/run.sh
         chmod 777 run.sh
 
-    - name: Download qcow2
+    - name: Download Images
       run: | 
         ./run.sh
       
-    - name: Build and Upload Images
+    - name: Upload Images
       run: |
         systems=("debian" "ubuntu" "centos" "kali" "rockylinux" "almalinux" "alpine" "openwrt" "oracle"  "fedora" "openeuler" "gentoo" "devuan")
         images=($(ls | grep "cloud"))
