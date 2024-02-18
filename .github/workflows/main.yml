@@ -1,4 +1,4 @@
-name: Build PVE KVM images
+name: Build LXC ARM images
 on:
   workflow_dispatch:
 
