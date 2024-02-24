@@ -2,7 +2,7 @@
 # 从 https://github.com/oneclickvirt/lxc_arm_images 获取
 
 opath=$(pwd)
-
+rm -rf *.tar.xz
 # 检查并安装依赖工具
 if command -v apt-get >/dev/null 2>&1; then
     # ubuntu debian kali
