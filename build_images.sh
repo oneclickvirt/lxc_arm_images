@@ -15,15 +15,15 @@ if command -v apt-get >/dev/null 2>&1; then
     if ! command -v jq >/dev/null 2>&1; then
         sudo apt-get install jq -y
     fi
-    uname_output=$(uname -a)
-    if [[ $uname_output != *ARM* && $uname_output != *arm* && $uname_output != *aarch* ]]; then
-        if ! command -v snap >/dev/null 2>&1; then
-            sudo apt-get install snapd -y
-        fi
-        if ! command -v distrobuilder >/dev/null 2>&1; then
-            sudo snap install distrobuilder --classic
-        fi
+    # uname_output=$(uname -a)
+    # if [[ $uname_output != *ARM* && $uname_output != *arm* && $uname_output != *aarch* ]]; then
+    if ! command -v snap >/dev/null 2>&1; then
+        sudo apt-get install snapd -y
     fi
+    if ! command -v distrobuilder >/dev/null 2>&1; then
+        sudo snap install distrobuilder --classic
+    fi
+    # fi
     # else
     #     sudo apt-get install build-essential -y
     #     export CGO_ENABLED=1
