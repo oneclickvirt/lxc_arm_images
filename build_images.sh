@@ -166,6 +166,7 @@ build_or_list_images() {
                         mv rootfs.tar.xz "${run_funct}_${ver_num}_${version}_${arch}_${variant}.tar.xz"
                         rm -rf rootfs.tar.xz
                     fi
+                    ls
                 else
                     if [[ "$run_funct" == "gentoo" ]]; then
                         [ "${arch}" = "amd64" ] && arch="x86_64"

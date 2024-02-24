@@ -28,6 +28,7 @@ jobs:
             release_id=$(curl -s -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/oneclickvirt/lxc_arm_images/releases/tags/$distro" | jq -r '.id')
             echo "Building $distro and packge zips"
             bash build_images.sh $distro true arm64
+            ls
             for file in "${zip_name_list[@]}"; do
                 if [ -f "$file" ] && [ $(stat -c %s "$file") -gt 10485760 ]; then
                     echo "Checking if $file already exists in release..."
