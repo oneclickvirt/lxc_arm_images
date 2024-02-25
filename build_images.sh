@@ -87,6 +87,27 @@ build_or_list_images() {
         ver_num=${ver_nums[i]}
         for arch in "${architectures[@]}"; do
             for variant in "${variants[@]}"; do
+                # apk apt dnf egoportage opkg pacman portage yum equo xbps zypper luet slackpkg
+                if [[ "$run_funct" == "centos" || "$run_funct" == "fedora" || "$run_funct" == "openeuler" ]]; then
+                    manager="yum"
+                elif [[ "$run_funct" == "kali" || "$run_funct" == "ubuntu" || "$run_funct" == "debian" ]]; then
+                    manager="apt"
+                elif [[ "$run_funct" == "almalinux" || "$run_funct" == "rockylinux" || "$run_funct" == "oracle" ]]; then
+                    manager="dnf"
+                elif [[ "$run_funct" == "archlinux" ]]; then
+                    manager="pacman"
+                elif [[ "$run_funct" == "alpine" ]]; then
+                    manager="apk"
+                elif [[ "$run_funct" == "openwrt" ]]; then
+                    manager="opkg"
+                elif [[ "$run_funct" == "gentoo" ]]; then
+                    manager="portage"
+                elif [[ "$run_funct" == "opensuse" ]]; then
+                    manager="zypper"
+                else
+                    echo "Unsupported distribution: $run_funct"
+                    exit 1
+                fi
                 EXTRA_ARGS=""
                 if [[ "$run_funct" == "centos" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
@@ -108,10 +129,12 @@ build_or_list_images() {
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
                     EXTRA_ARGS="-o source.variant=boot"
-                elif [[ "$run_funct" == "oracle" && "$version" == "9" ]]; then
+                elif [[ "$run_funct" == "oracle" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
-                    EXTRA_ARGS="-o source.url=https://yum.oracle.com/ISOS/OracleLinux"
+                    if [[ "$version" == "9" ]]; then
+                        EXTRA_ARGS="-o source.url=https://yum.oracle.com/ISOS/OracleLinux"
+                    fi
                 elif [[ "$run_funct" == "archlinux" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
@@ -124,6 +147,9 @@ build_or_list_images() {
                     if [ "${release}" = "edge" ]; then
                         EXTRA_ARGS="-o source.same_as=3.19"
                     fi
+                elif [[ "$run_funct" == "fedora" || "$run_funct" == "openeuler" || "$run_funct" == "opensuse" ]]; then
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
                 elif [[ "$run_funct" == "gentoo" ]]; then
                     [ "${arch}" = "x86_64" ] && arch="amd64"
                     [ "${arch}" = "aarch64" ] && arch="arm64"
@@ -132,9 +158,6 @@ build_or_list_images() {
                     else
                         EXTRA_ARGS="-o source.variant=${variant}"
                     fi
-                elif [[ "$run_funct" == "fedora" || "$run_funct" == "openeuler" || "$run_funct" == "opensuse" ]]; then
-                    [ "${arch}" = "amd64" ] && arch="x86_64"
-                    [ "${arch}" = "arm64" ] && arch="aarch64"
                 elif [[ "$run_funct" == "debian" ]]; then
                     [ "${arch}" = "x86_64" ] && arch="amd64"
                     [ "${arch}" = "aarch64" ] && arch="arm64"
@@ -144,27 +167,6 @@ build_or_list_images() {
                     if [ "${arch}" != "amd64" ] && [ "${arch}" != "i386" ] && [ "${arch}" != "x86_64" ]; then
                         EXTRA_ARGS="-o source.url=http://ports.ubuntu.com/ubuntu-ports"
                     fi
-                fi
-                # apk apt dnf egoportage opkg pacman portage yum equo xbps zypper luet slackpkg
-                if [[ "$run_funct" == "centos" || "$run_funct" == "fedora" || "$run_funct" == "openeuler" ]]; then
-                    manager="yum"
-                elif [[ "$run_funct" == "kali" || "$run_funct" == "ubuntu" || "$run_funct" == "debian" ]]; then
-                    manager="apt"
-                elif [[ "$run_funct" == "almalinux" || "$run_funct" == "rockylinux" || "$run_funct" == "oracle" ]]; then
-                    manager="dnf"
-                elif [[ "$run_funct" == "archlinux" ]]; then
-                    manager="pacman"
-                elif [[ "$run_funct" == "alpine" ]]; then
-                    manager="apk"
-                elif [[ "$run_funct" == "openwrt" ]]; then
-                    manager="opkg"
-                elif [[ "$run_funct" == "gentoo" ]]; then
-                    manager="portage"
-                elif [[ "$run_funct" == "opensuse" ]]; then
-                    manager="zypper"
-                else
-                    echo "Unsupported distribution: $run_funct"
-                    exit 1
                 fi
                 if [ "$is_build_image" == true ]; then
                     if command -v distrobuilder >/dev/null 2>&1; then
@@ -204,7 +206,7 @@ build_or_list_images() {
                     fi
                     if [[ "$run_funct" == "gentoo" ]]; then
                         [ "${arch}" = "amd64" ] && arch="x86_64"
-                    elif [[ "$run_funct" == "fedora" || "$run_funct" == "openeuler" || "$run_funct" == "opensuse" ]]; then
+                    elif [[ "$run_funct" == "fedora" || "$run_funct" == "openeuler" || "$run_funct" == "opensuse" || "$run_funct" == "alpine" || "$run_funct" == "oracle" || "$run_funct" == "archlinux" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
                     elif [[ "$run_funct" == "almalinux" || "$run_funct" == "centos" || "$run_funct" == "rockylinux" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
@@ -218,14 +220,12 @@ build_or_list_images() {
                     fi
                     ls
                 else
-                    if [[ "$run_funct" == "gentoo" ]]; then
+                    if [[ "$run_funct" == "gentoo" || "$run_funct" == "debian" || "$run_funct" == "ubuntu" ]]; then
                         [ "${arch}" = "amd64" ] && arch="x86_64"
                     elif [[ "$run_funct" == "fedora" || "$run_funct" == "openeuler" || "$run_funct" == "opensuse" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
                     elif [[ "$run_funct" == "almalinux" || "$run_funct" == "centos" || "$run_funct" == "rockylinux" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
-                    elif [[ "$run_funct" == "debian" || "$run_funct" == "ubuntu" ]]; then
-                        [ "${arch}" = "amd64" ] && arch="x86_64"
                     fi
                     zip_name_list+=("${run_funct}_${ver_num}_${version}_${arch}_${variant}.tar.xz")
                 fi
