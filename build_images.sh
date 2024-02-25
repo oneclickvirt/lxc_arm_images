@@ -89,9 +89,12 @@ build_or_list_images() {
             for variant in "${variants[@]}"; do
                 EXTRA_ARGS=""
                 if [[ "$run_funct" == "oracle" && "$version" == "9" ]]; then
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
                     EXTRA_ARGS="-o source.url=https://yum.oracle.com/ISOS/OracleLinux"
                 elif [[ "$run_funct" == "centos" ]]; then
-                    [ "${ARCH}" = "arm64" ] && ARCH="aarch64"
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
                     if [ "$version" = "7" ] && [ "${arch}" != "amd64" ] && [ "${arch}" != "x86_64" ]; then
                         EXTRA_ARGS="-o source.url=http://mirror.math.princeton.edu/pub/centos-altarch/ -o source.skip_verification=true"
                     fi
@@ -102,37 +105,45 @@ build_or_list_images() {
                         EXTRA_ARGS="${EXTRA_ARGS} -o source.url=https://mirror1.hs-esslingen.de/pub/Mirrors/centos-stream"
                     fi
                 elif [[ "$run_funct" == "archlinux" ]]; then
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
                     if [ "${arch}" != "amd64" ] && [ "${arch}" != "i386" ] && [ "${arch}" != "x86_64" ]; then
                         EXTRA_ARGS="-o source.url=http://os.archlinuxarm.org"
                     fi
                 elif [[ "$run_funct" == "alpine" ]]; then
-                    EXTRA_ARGS="-o source.same_as=3.19"
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
+                    if [ "${release}" = "edge" ]; then
+                        EXTRA_ARGS="-o source.same_as=3.19"
+                    fi
                 elif [[ "$run_funct" == "rockylinux" ]]; then
-                    [ "${ARCH}" = "arm64" ] && ARCH="aarch64"
-                    EXTRA_ARGS="-o source.variant=boot"
-                elif [[ "$run_funct" == "almalinux" ]]; then
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
                     EXTRA_ARGS="-o source.variant=boot"
-                elif [[ "$run_funct" == "ubuntu" ]]; then
-                    if [ "${arch}" != "amd64" ] && [ "${arch}" != "i386" ] && [ "${arch}" != "x86_64" ]; then
-                        EXTRA_ARGS="-o source.url=http://ports.ubuntu.com/ubuntu-ports"
-                    fi
+                elif [[ "$run_funct" == "almalinux" ]]; then
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
+                    EXTRA_ARGS="-o source.variant=boot"
                 elif [[ "$run_funct" == "gentoo" ]]; then
+                    [ "${arch}" = "x86_64" ] && arch="amd64"
+                    [ "${arch}" = "aarch64" ] && arch="arm64"
                     if [ "${variant}" = "cloud" ]; then
                         EXTRA_ARGS="-o source.variant=openrc"
                     else
                         EXTRA_ARGS="-o source.variant=${variant}"
                     fi
+                elif [[ "$run_funct" == "fedora" || "$run_funct" == "openeuler" || "$run_funct" == "opensuse" ]]; then
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
+                elif [[ "$run_funct" == "debian" ]]; then
                     [ "${arch}" = "x86_64" ] && arch="amd64"
-                elif [[ "$run_funct" == "fedora" ]]; then
-                    [ "${arch}" = "amd64" ] && arch="x86_64"
-                    [ "${arch}" = "arm64" ] && arch="aarch64"
-                elif [[ "$run_funct" == "opensuse" ]]; then
-                    [ "${arch}" = "amd64" ] && arch="x86_64"
-                    [ "${arch}" = "arm64" ] && arch="aarch64"
-                elif [[ "$run_funct" == "openeuler" ]]; then
-                    [ "${arch}" = "amd64" ] && arch="x86_64"
-                    [ "${arch}" = "arm64" ] && arch="aarch64"
+                    [ "${arch}" = "aarch64" ] && arch="arm64"
+                elif [[ "$run_funct" == "ubuntu" ]]; then
+                    [ "${arch}" = "x86_64" ] && arch="amd64"
+                    [ "${arch}" = "aarch64" ] && arch="arm64"
+                    if [ "${arch}" != "amd64" ] && [ "${arch}" != "i386" ] && [ "${arch}" != "x86_64" ]; then
+                        EXTRA_ARGS="-o source.url=http://ports.ubuntu.com/ubuntu-ports"
+                    fi
                 fi
                 # apk apt dnf egoportage opkg pacman portage yum equo xbps zypper luet slackpkg
                 if [[ "$run_funct" == "centos" || "$run_funct" == "fedora" || "$run_funct" == "openeuler" ]]; then
@@ -193,14 +204,12 @@ build_or_list_images() {
                     fi
                     if [[ "$run_funct" == "gentoo" ]]; then
                         [ "${arch}" = "amd64" ] && arch="x86_64"
-                    elif [[ "$run_funct" == "fedora" ]]; then
-                        [ "${arch}" = "aarch64" ] && arch="arm64"
-                    elif [[ "$run_funct" == "opensuse" ]]; then
-                        [ "${arch}" = "aarch64" ] && arch="arm64"
-                    elif [[ "$run_funct" == "openeuler" ]]; then
+                    elif [[ "$run_funct" == "fedora" || "$run_funct" == "openeuler" || "$run_funct" == "opensuse" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
                     elif [[ "$run_funct" == "almalinux" || "$run_funct" == "centos" || "$run_funct" == "rockylinux" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
+                    elif [[ "$run_funct" == "debian" || "$run_funct" == "ubuntu" ]]; then
+                        [ "${arch}" = "amd64" ] && arch="x86_64"
                     fi
                     ls
                     if [ -f rootfs.tar.xz ]; then
@@ -211,12 +220,12 @@ build_or_list_images() {
                 else
                     if [[ "$run_funct" == "gentoo" ]]; then
                         [ "${arch}" = "amd64" ] && arch="x86_64"
-                    elif [[ "$run_funct" == "fedora" ]]; then
+                    elif [[ "$run_funct" == "fedora" || "$run_funct" == "openeuler" || "$run_funct" == "opensuse" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
-                    elif [[ "$run_funct" == "opensuse" ]]; then
+                    elif [[ "$run_funct" == "almalinux" || "$run_funct" == "centos" || "$run_funct" == "rockylinux" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
-                    elif [[ "$run_funct" == "openeuler" ]]; then
-                        [ "${arch}" = "aarch64" ] && arch="arm64"
+                    elif [[ "$run_funct" == "debian" || "$run_funct" == "ubuntu" ]]; then
+                        [ "${arch}" = "amd64" ] && arch="x86_64"
                     fi
                     zip_name_list+=("${run_funct}_${ver_num}_${version}_${arch}_${variant}.tar.xz")
                 fi
