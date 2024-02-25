@@ -3,6 +3,7 @@
 
 opath=$(pwd)
 rm -rf *.tar.xz
+ls
 # 检查并安装依赖工具
 if command -v apt-get >/dev/null 2>&1; then
     # ubuntu debian kali
