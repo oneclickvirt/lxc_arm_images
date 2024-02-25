@@ -91,6 +91,7 @@ build_or_list_images() {
                 if [[ "$run_funct" == "oracle" && "$version" == "9" ]]; then
                     EXTRA_ARGS="-o source.url=https://yum.oracle.com/ISOS/OracleLinux"
                 elif [[ "$run_funct" == "centos" ]]; then
+                    [ "${ARCH}" = "arm64" ] && ARCH="aarch64"
                     if [ "$version" = "7" ] && [ "${arch}" != "amd64" ] && [ "${arch}" != "x86_64" ]; then
                         EXTRA_ARGS="-o source.url=http://mirror.math.princeton.edu/pub/centos-altarch/ -o source.skip_verification=true"
                     fi
@@ -107,6 +108,7 @@ build_or_list_images() {
                 elif [[ "$run_funct" == "alpine" ]]; then
                     EXTRA_ARGS="-o source.same_as=3.19"
                 elif [[ "$run_funct" == "rockylinux" ]]; then
+                    [ "${ARCH}" = "arm64" ] && ARCH="aarch64"
                     EXTRA_ARGS="-o source.variant=boot"
                 elif [[ "$run_funct" == "almalinux" ]]; then
                     [ "${arch}" = "arm64" ] && arch="aarch64"
@@ -197,7 +199,7 @@ build_or_list_images() {
                         [ "${arch}" = "aarch64" ] && arch="arm64"
                     elif [[ "$run_funct" == "openeuler" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
-                    elif [[ "$run_funct" == "almalinux" ]]; then
+                    elif [[ "$run_funct" == "almalinux" || "$run_funct" == "centos" || "$run_funct" == "rockylinux" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
                     fi
                     ls
