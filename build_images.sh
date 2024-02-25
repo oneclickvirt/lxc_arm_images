@@ -1,6 +1,10 @@
 #!/bin/bash
 # 从 https://github.com/oneclickvirt/lxc_arm_images 获取
 
+run_funct="${1:-debian}"
+is_build_image="${2:-false}"
+build_arch="${3:-arm64}"
+zip_name_list=()
 opath=$(pwd)
 rm -rf *.tar.xz
 ls
@@ -67,10 +71,6 @@ if command -v apt-get >/dev/null 2>&1; then
         sudo apt-get install debootstrap -y
     fi
 fi
-run_funct="${1:-debian}"
-is_build_image="${2:-false}"
-build_arch="${3:-arm64}"
-zip_name_list=()
 
 # 构建或列出不同发行版的镜像
 build_or_list_images() {
