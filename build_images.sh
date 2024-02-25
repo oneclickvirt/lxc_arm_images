@@ -109,6 +109,7 @@ build_or_list_images() {
                 elif [[ "$run_funct" == "rockylinux" ]]; then
                     EXTRA_ARGS="-o source.variant=boot"
                 elif [[ "$run_funct" == "almalinux" ]]; then
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
                     EXTRA_ARGS="-o source.variant=boot"
                 elif [[ "$run_funct" == "ubuntu" ]]; then
                     if [ "${arch}" != "amd64" ] && [ "${arch}" != "i386" ] && [ "${arch}" != "x86_64" ]; then
@@ -195,6 +196,8 @@ build_or_list_images() {
                     elif [[ "$run_funct" == "opensuse" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
                     elif [[ "$run_funct" == "openeuler" ]]; then
+                        [ "${arch}" = "aarch64" ] && arch="arm64"
+                    elif [[ "$run_funct" == "almalinux" ]]; then
                         [ "${arch}" = "aarch64" ] && arch="arm64"
                     fi
                     ls
