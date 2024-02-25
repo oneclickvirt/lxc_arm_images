@@ -24,28 +24,30 @@ if command -v apt-get >/dev/null 2>&1; then
             sudo snap install distrobuilder --classic
         fi
     else
-        sudo apt-get install build-essential -y
-        export CGO_ENABLED=1
-        export CC=gcc
-        wget https://go.dev/dl/go1.21.6.linux-arm64.tar.gz
-        chmod 777 go1.21.6.linux-arm64.tar.gz
-        rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.6.linux-arm64.tar.gz
-        export GOROOT=/usr/local/go
-        export PATH=$GOROOT/bin:$PATH
-        export GOPATH=$HOME/goprojects/
-        go version
-        apt-get install -q -y debootstrap rsync gpg squashfs-tools git make
-        git config --global user.name "daily-update"
-        git config --global user.email "tg@spiritlhl.top"
-        mkdir -p $HOME/go/src/github.com/lxc/
-        cd $HOME/go/src/github.com/lxc/
-        git clone https://github.com/lxc/distrobuilder
-        cd ./distrobuilder
-        make
-        export PATH=$HOME/goprojects/bin/distrobuilder:$PATH
-        echo $PATH
-        find $HOME -name distrobuilder -type f 2>/dev/null
-        $HOME/goprojects/bin/distrobuilder --version
+        # sudo apt-get install build-essential -y
+        # export CGO_ENABLED=1
+        # export CC=gcc
+        # wget https://go.dev/dl/go1.21.6.linux-arm64.tar.gz
+        # chmod 777 go1.21.6.linux-arm64.tar.gz
+        # rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.6.linux-arm64.tar.gz
+        # export GOROOT=/usr/local/go
+        # export PATH=$GOROOT/bin:$PATH
+        # export GOPATH=$HOME/goprojects/
+        # go version
+        # apt-get install -q -y debootstrap rsync gpg squashfs-tools git make
+        # git config --global user.name "daily-update"
+        # git config --global user.email "tg@spiritlhl.top"
+        # mkdir -p $HOME/go/src/github.com/lxc/
+        # cd $HOME/go/src/github.com/lxc/
+        # git clone https://github.com/lxc/distrobuilder
+        # cd ./distrobuilder
+        # make
+        # export PATH=$HOME/goprojects/bin/distrobuilder:$PATH
+        # echo $PATH
+        # find $HOME -name distrobuilder -type f 2>/dev/null
+        # $HOME/goprojects/bin/distrobuilder --version
+        wget https://api.ilolicon.com/distrobuilder.deb
+        dpkg -i distrobuilder.deb
     fi
     if ! command -v debootstrap >/dev/null 2>&1; then
         sudo apt-get install debootstrap -y
@@ -138,18 +140,18 @@ build_or_list_images() {
                 fi
                 if [ "$is_build_image" == true ]; then
                     if [[ "$run_funct" == "gentoo" ]]; then
-                        echo "sudo $HOME/goprojects/bin/distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.architecture=${arch} -o image.variant=${variant} ${EXTRA_ARGS}"
-                        if sudo $HOME/goprojects/bin/distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.architecture=${arch} -o image.variant=${variant} ${EXTRA_ARGS}; then
+                        echo "sudo distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.architecture=${arch} -o image.variant=${variant} ${EXTRA_ARGS}"
+                        if sudo distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.architecture=${arch} -o image.variant=${variant} ${EXTRA_ARGS}; then
                             echo "Command succeeded"
                         fi
                     elif [[ "$run_funct" != "archlinux" ]]; then
-                        echo "sudo $HOME/goprojects/bin/distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.release=${version} -o image.architecture=${arch} -o image.variant=${variant} -o packages.manager=${manager} ${EXTRA_ARGS}"
-                        if sudo $HOME/goprojects/bin/distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.release=${version} -o image.architecture=${arch} -o image.variant=${variant} -o packages.manager=${manager} ${EXTRA_ARGS}; then
+                        echo "sudo distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.release=${version} -o image.architecture=${arch} -o image.variant=${variant} -o packages.manager=${manager} ${EXTRA_ARGS}"
+                        if sudo distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.release=${version} -o image.architecture=${arch} -o image.variant=${variant} -o packages.manager=${manager} ${EXTRA_ARGS}; then
                             echo "Command succeeded"
                         fi
                     else
-                        echo "sudo $HOME/goprojects/bin/distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.architecture=${arch} -o image.variant=${variant} -o packages.manager=${manager} ${EXTRA_ARGS}"
-                        if sudo $HOME/goprojects/bin/distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.architecture=${arch} -o image.variant=${variant} -o packages.manager=${manager} ${EXTRA_ARGS}; then
+                        echo "sudo distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.architecture=${arch} -o image.variant=${variant} -o packages.manager=${manager} ${EXTRA_ARGS}"
+                        if sudo distrobuilder build-lxc "${opath}/images_yaml/${run_funct}.yaml" -o image.architecture=${arch} -o image.variant=${variant} -o packages.manager=${manager} ${EXTRA_ARGS}; then
                             echo "Command succeeded"
                         fi
                     fi
