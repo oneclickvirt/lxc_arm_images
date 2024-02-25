@@ -20,6 +20,7 @@ if command -v apt-get >/dev/null 2>&1; then
         if ! command -v snap >/dev/null 2>&1; then
             sudo apt-get install snapd -y
         fi
+        sudo systemctl start snapd
         if ! command -v distrobuilder >/dev/null 2>&1; then
             sudo snap install distrobuilder --classic
         fi
@@ -27,6 +28,7 @@ if command -v apt-get >/dev/null 2>&1; then
         if ! command -v snap >/dev/null 2>&1; then
             sudo apt-get install snapd -y
         fi
+        sudo systemctl start snapd
         if ! command -v distrobuilder >/dev/null 2>&1; then
             sudo snap install distrobuilder --classic
         fi
