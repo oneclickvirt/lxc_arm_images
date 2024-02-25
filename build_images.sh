@@ -88,11 +88,7 @@ build_or_list_images() {
         for arch in "${architectures[@]}"; do
             for variant in "${variants[@]}"; do
                 EXTRA_ARGS=""
-                if [[ "$run_funct" == "oracle" && "$version" == "9" ]]; then
-                    [ "${arch}" = "amd64" ] && arch="x86_64"
-                    [ "${arch}" = "arm64" ] && arch="aarch64"
-                    EXTRA_ARGS="-o source.url=https://yum.oracle.com/ISOS/OracleLinux"
-                elif [[ "$run_funct" == "centos" ]]; then
+                if [[ "$run_funct" == "centos" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
                     if [ "$version" = "7" ] && [ "${arch}" != "amd64" ] && [ "${arch}" != "x86_64" ]; then
@@ -104,6 +100,18 @@ build_or_list_images() {
                     if [ "$version" = "9-Stream" ]; then
                         EXTRA_ARGS="${EXTRA_ARGS} -o source.url=https://mirror1.hs-esslingen.de/pub/Mirrors/centos-stream"
                     fi
+                elif [[ "$run_funct" == "rockylinux" ]]; then
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
+                    EXTRA_ARGS="-o source.variant=boot"
+                elif [[ "$run_funct" == "almalinux" ]]; then
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
+                    EXTRA_ARGS="-o source.variant=boot"
+                elif [[ "$run_funct" == "oracle" && "$version" == "9" ]]; then
+                    [ "${arch}" = "amd64" ] && arch="x86_64"
+                    [ "${arch}" = "arm64" ] && arch="aarch64"
+                    EXTRA_ARGS="-o source.url=https://yum.oracle.com/ISOS/OracleLinux"
                 elif [[ "$run_funct" == "archlinux" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
@@ -116,14 +124,6 @@ build_or_list_images() {
                     if [ "${release}" = "edge" ]; then
                         EXTRA_ARGS="-o source.same_as=3.19"
                     fi
-                elif [[ "$run_funct" == "rockylinux" ]]; then
-                    [ "${arch}" = "amd64" ] && arch="x86_64"
-                    [ "${arch}" = "arm64" ] && arch="aarch64"
-                    EXTRA_ARGS="-o source.variant=boot"
-                elif [[ "$run_funct" == "almalinux" ]]; then
-                    [ "${arch}" = "amd64" ] && arch="x86_64"
-                    [ "${arch}" = "arm64" ] && arch="aarch64"
-                    EXTRA_ARGS="-o source.variant=boot"
                 elif [[ "$run_funct" == "gentoo" ]]; then
                     [ "${arch}" = "x86_64" ] && arch="amd64"
                     [ "${arch}" = "aarch64" ] && arch="arm64"

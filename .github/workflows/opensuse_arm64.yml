@@ -1,8 +1,8 @@
 name: opensuse x86_64
 
 on:
-  # schedule:
-  #   - cron: '30 16 * * *'
+  schedule:
+    - cron: '30 16 * * *'
   workflow_dispatch:
 
 jobs:

@@ -1,8 +1,8 @@
 name: fedora arm64
 
 on:
-  # schedule:
-  #   - cron: '30 14 * * *'
+  schedule:
+    - cron: '30 14 * * *'
   workflow_dispatch:
 
 jobs:
