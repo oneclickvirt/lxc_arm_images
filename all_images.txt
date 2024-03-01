@@ -101,3 +101,6 @@ fedora_38_38_arm64_default.tar.xz
 fedora_38_38_arm64_cloud.tar.xz
 fedora_39_39_arm64_default.tar.xz
 fedora_39_39_arm64_cloud.tar.xz
+gentoo_current_current_arm64_cloud.tar.xz
+gentoo_current_current_arm64_systemd.tar.xz
+gentoo_current_current_arm64_openrc.tar.xz
