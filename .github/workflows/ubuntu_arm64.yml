@@ -7,7 +7,6 @@ on:
 
 jobs:
   ubuntu_arm64_images:
-    # runs-on: self-hosted
     runs-on: ARM64
     steps:
     - uses: actions/checkout@v2
