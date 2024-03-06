@@ -104,3 +104,16 @@ fedora_39_39_arm64_cloud.tar.xz
 gentoo_current_current_arm64_cloud.tar.xz
 gentoo_current_current_arm64_systemd.tar.xz
 gentoo_current_current_arm64_openrc.tar.xz
+centos_7_7_arm64_default.tar.xz
+centos_7_7_arm64_cloud.tar.xz
+centos_8_8-Stream_arm64_default.tar.xz
+centos_8_8-Stream_arm64_cloud.tar.xz
+centos_9_9-Stream_arm64_default.tar.xz
+centos_9_9-Stream_arm64_cloud.tar.xz
+almalinux_8_8_arm64_default.tar.xz
+almalinux_8_8_arm64_cloud.tar.xz
+almalinux_9_9_arm64_default.tar.xz
+almalinux_9_9_arm64_cloud.tar.xz
+openwrt_snapshot_snapshot_arm64_default.tar.xz
+openwrt_snapshot_snapshot_arm64_cloud.tar.xz
+openwrt_23.05_23.05_arm64_default.tar.xz
