@@ -1,4 +1,3 @@
-
 ubuntu_18.04_bionic_arm64_default.tar.xz
 ubuntu_18.04_bionic_arm64_cloud.tar.xz
 ubuntu_20.04_focal_arm64_default.tar.xz
