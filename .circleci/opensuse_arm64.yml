@@ -58,8 +58,7 @@ jobs:
                 done
             done
 
-workflows:
-  daily-run-workflow:
+daily-run-workflow:
   triggers:
     - schedule:
         cron: "30 1 * * *"

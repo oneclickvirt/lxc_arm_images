@@ -58,7 +58,13 @@ jobs:
                 done
             done
 
-workflows:
-  sample:
-    jobs:
-      - build
+daily-run-workflow:
+  triggers:
+    - schedule:
+        cron: "30 0 * * *"
+        filters:
+          branches:
+            only:
+              - main
+  jobs:
+    - build
