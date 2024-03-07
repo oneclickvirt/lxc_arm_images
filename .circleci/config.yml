@@ -159,7 +159,7 @@ jobs:
             done
 
 workflows:
-  nightly:
+  sample:
     triggers:
       - schedule:
           cron: "0 12 * * *"
