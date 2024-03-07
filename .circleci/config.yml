@@ -160,6 +160,13 @@ jobs:
 
 workflows:
   sample:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
     jobs:
       - build_oracle
       - build_rockylinux
