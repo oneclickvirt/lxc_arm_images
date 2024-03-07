@@ -159,7 +159,8 @@ jobs:
             done
 
 workflows:
-  sample:
+  commit:
+  nightly:
     triggers:
       - schedule:
           cron: "0 0 * * *"
