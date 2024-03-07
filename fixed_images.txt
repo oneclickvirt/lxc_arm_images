@@ -30,10 +30,20 @@ almalinux_8_8_arm64_default.tar.xz
 almalinux_8_8_arm64_cloud.tar.xz
 almalinux_9_9_arm64_default.tar.xz
 almalinux_9_9_arm64_cloud.tar.xz
+rockylinux_8_8_arm64_default.tar.xz
+rockylinux_8_8_arm64_cloud.tar.xz
+rockylinux_9_9_arm64_default.tar.xz
+rockylinux_9_9_arm64_cloud.tar.xz
 fedora_38_38_arm64_default.tar.xz
 fedora_38_38_arm64_cloud.tar.xz
 fedora_39_39_arm64_default.tar.xz
 fedora_39_39_arm64_cloud.tar.xz
+opensuse_15.4_15.4_arm64_default.tar.xz
+opensuse_15.4_15.4_arm64_cloud.tar.xz
+opensuse_15.5_15.5_arm64_default.tar.xz
+opensuse_15.5_15.5_arm64_cloud.tar.xz
+opensuse_tumbleweed_tumbleweed_arm64_default.tar.xz
+opensuse_tumbleweed_tumbleweed_arm64_cloud.tar.xz
 alpine_3.16_3.16_arm64_cloud.tar.xz
 alpine_3.17_3.17_arm64_cloud.tar.xz
 alpine_3.18_3.18_arm64_cloud.tar.xz
@@ -48,3 +58,5 @@ openwrt_snapshot_snapshot_arm64_default.tar.xz
 openwrt_snapshot_snapshot_arm64_cloud.tar.xz
 openwrt_23.05_23.05_arm64_default.tar.xz
 openwrt_23.05_23.05_arm64_cloud.tar.xz
+oracle_8_8_arm64_cloud.tar.xz
+oracle_9_9_arm64_cloud.tar.xz
