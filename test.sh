@@ -7,6 +7,8 @@
 log_file="log"
 fixed_images_file="fixed_images.txt"
 date=$(date)
+rm -rf "$log_file"
+rm -rf "fixed_images.txt"
 echo "$date" >> "$log_file"
 echo "------------------------------------------" >> "$log_file"
 release_names=("ubuntu" "debian" "kali" "centos" "almalinux" "rockylinux" "fedora" "opensuse" "alpine" "archlinux" "gentoo" "openwrt" "oracle" "openeuler")
