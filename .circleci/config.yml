@@ -159,7 +159,6 @@ jobs:
             done
 
 workflows:
-  commit:
   nightly:
     triggers:
       - schedule:
