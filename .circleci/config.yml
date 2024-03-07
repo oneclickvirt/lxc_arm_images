@@ -161,5 +161,7 @@ jobs:
 workflows:
   sample:
   jobs:
-    - build
+    - build_oracle
+    - build_rockylinux
+    - build_opensuse
 
