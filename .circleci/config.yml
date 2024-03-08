@@ -159,14 +159,7 @@ jobs:
             done
 
 workflows:
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 3 * * *"
-          filters:
-            branches:
-              only:
-                - main
+  sample:
     jobs:
       - build_oracle
       - build_rockylinux
