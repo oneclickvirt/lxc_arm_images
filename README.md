@@ -22,7 +22,7 @@ Releases中的镜像(每日拉取镜像进行自动修补和更新)：
 
 本仓库每日检测可用性的日志：https://github.com/oneclickvirt/lxc_arm_images/blob/main/log
 
-本仓库的容器镜像服务于： https://github.com/spiritLHLS/pve
+本仓库的容器镜像服务于： https://github.com/oneclickvirt/pve
 
 ## Introduce
 
@@ -44,7 +44,7 @@ A list of names for all images in this repository: https://github.com/oneclickvi
 
 A log of daily availability tests for this repository: https://github.com/oneclickvirt/lxc_arm_images/blob/main/log
 
-This repository container images serves https://github.com/spiritLHLS/pve
+This repository container images serves https://github.com/oneclickvirt/pve
 
 ## Test
 
