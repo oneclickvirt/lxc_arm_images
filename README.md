@@ -71,7 +71,7 @@ pct stop 101 && pct destroy 101
 
 ## Thanks
 
-https://github.com/spiritLHLS/pve
+https://github.com/oneclickvirt/pve
 
 https://linuxcontainers.org/incus/docs/main/
 
