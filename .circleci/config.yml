@@ -108,7 +108,7 @@ jobs:
   build_opensuse:
     machine:
       image: ubuntu-2204:2024.01.1
-    resource_class: arm.large
+    resource_class: arm.medium
     steps:
       - checkout
       - run:
@@ -212,7 +212,7 @@ jobs:
   build_openwrt:
       machine:
         image: ubuntu-2204:2024.01.1
-      resource_class: arm.large
+      resource_class: arm.medium
       steps:
         - checkout
         - run:
@@ -628,7 +628,7 @@ jobs:
   build_alpine:
       machine:
         image: ubuntu-2204:2024.01.1
-      resource_class: arm.small
+      resource_class: arm.medium
       steps:
         - checkout
         - run:
