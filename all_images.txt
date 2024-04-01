@@ -60,3 +60,8 @@ opensuse_15.5_15.5_arm64_default.tar.xz
 opensuse_15.5_15.5_arm64_cloud.tar.xz
 opensuse_tumbleweed_tumbleweed_arm64_default.tar.xz
 opensuse_tumbleweed_tumbleweed_arm64_cloud.tar.xz
+openeuler_22.03_22.03_arm64_default.tar.xz
+openeuler_22.03_22.03_arm64_cloud.tar.xz
+openeuler_20.03_20.03_arm64_cloud.tar.xz
+openeuler_23.09_23.09_arm64_default.tar.xz
+openeuler_23.09_23.09_arm64_cloud.tar.xz
