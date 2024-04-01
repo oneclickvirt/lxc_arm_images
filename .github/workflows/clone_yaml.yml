@@ -19,6 +19,7 @@ jobs:
     - name: clone yaml
       run: |
         bash clone_modify_yaml.sh
+        bash test.sh
         
     - name: Configure Git
       run: |
