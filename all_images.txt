@@ -68,3 +68,4 @@ openeuler_23.09_23.09_arm64_cloud.tar.xz
 openeuler_20.03_20.03_arm64_default.tar.xz
 fedora_40_40_arm64_default.tar.xz
 fedora_40_40_arm64_cloud.tar.xz
+alpine_3.20_3.20_arm64_cloud.tar.xz
