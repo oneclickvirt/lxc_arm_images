@@ -160,7 +160,7 @@ jobs:
   build_ubuntu:
       machine:
         image: ubuntu-2204:2024.01.1
-      resource_class: arm.large
+      resource_class: arm.xlarge
       steps:
         - checkout
         - run:
@@ -264,7 +264,7 @@ jobs:
   build_openeuler:
       machine:
         image: ubuntu-2204:2024.01.1
-      resource_class: arm.large
+      resource_class: arm.xlarge
       steps:
         - checkout
         - run:
