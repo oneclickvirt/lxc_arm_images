@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_oneclickvirt_lxc_arm_images_1723378522188-pr-trigger-input-set
+  identifier: Build_oneclickvirt_lxc_arm_images_1723378522188prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_oneclickvirt_lxc_arm_images_1723378522188
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
