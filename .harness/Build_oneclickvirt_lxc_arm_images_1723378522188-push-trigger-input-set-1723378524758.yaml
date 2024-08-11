@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_oneclickvirt_lxc_arm_images_1723378522188-push-trigger-input-set
+  identifier: Build_oneclickvirt_lxc_arm_images_1723378522188pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_oneclickvirt_lxc_arm_images_1723378522188
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
