@@ -37,7 +37,7 @@ pipeline:
                       ls
                       chmod +x build_and_upload.sh
                       echo $SHELL
-                      bash build_and_upload.sh "<+secrets.getValue("GITHUB_TOKEN")>"
+                      bash build_and_upload.sh '<+secrets.getValue("GITHUB_TOKEN")>'
                   timeout: ""
                   type: Run
           platform:
