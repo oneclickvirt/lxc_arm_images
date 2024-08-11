@@ -14,4 +14,10 @@ blocks:
       jobs:
         - name: Process Data
           commands:
-            - sudo apt-get update - sudo apt-get install -y sudo zip jq snapd debootstrap - sudo snap install distrobuilder --classic - ls - chmod +x build_and_upload.sh - bash build_and_upload.sh $GITHUB_TOKEN
+            - checkout
+            - sudo apt-get update 
+            - sudo apt-get install -y sudo zip jq snapd debootstrap 
+            - sudo snap install distrobuilder --classic 
+            - ls 
+            - chmod +x build_and_upload.sh 
+            - bash build_and_upload.sh $GITHUB_TOKEN
