@@ -628,33 +628,25 @@ jobs:
 
 workflows:
   version: 2
-  commit-workflow:
+  nightly:
+    triggers:
+    - schedule:
+        cron: "0 12 * * *"
+        filters:
+          branches:
+            only:
+            - main
     jobs:
-      - build_oracle
-      - build_rockylinux
-      - build_opensuse
-      - build_openwrt
-      - build_kali
-      - build_fedora
-      - build_gentoo
-      - build_centos
-      - build_debian
-      - build_alpine
-      - build_archlinux
-      - build_almalinux
-  #     - build_openeuler
-  #     - build_ubuntu
-  # scheduled-workflow:
-  #   triggers:
-  #     - schedule:
-  #         cron: "0 12 * * *"
-  #         filters:
-  #           branches:
-  #             only: main
-  #   jobs:
-  #     - build_oracle
-  #     - build_rockylinux
-  #     - build_opensuse
-  #     - build_ubuntu
-  #     - build_openwrt
+    - build_oracle
+    - build_rockylinux
+    - build_opensuse
+    - build_openwrt
+    - build_kali
+    - build_fedora
+    - build_gentoo
+    - build_centos
+    - build_debian
+    - build_alpine
+    - build_archlinux
+    - build_almalinux
 
