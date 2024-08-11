@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 if [ -z "$1" ]; then
     echo "Error: GITHUB_TOKEN not provided"
     exit 1
