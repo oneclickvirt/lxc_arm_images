@@ -27,6 +27,7 @@ pipeline:
                       sudo apt-get update
                       sudo apt-get install -y sudo zip jq snapd debootstrap
                       sudo snap install distrobuilder --classic
+                      export GITHUB_TOKEN='<+secrets.getValue("GITHUB_TOKEN")>'
                   timeout: ""
                   type: Run
               - step:
