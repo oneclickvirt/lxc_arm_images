@@ -25,7 +25,7 @@ pipeline:
                   spec:
                     command: |
                       sudo apt-get update
-                      sudo apt-get install -y sudo zip jq snapd debootstrap
+                      sudo apt-get install -y sudo zip jq snapd debootstrap bash
                       sudo snap install distrobuilder --classic
                   timeout: ""
                   type: Run
@@ -36,7 +36,7 @@ pipeline:
                     command: |
                       ls
                       chmod +x build_and_upload.sh
-                      ./build_and_upload.sh "<+secrets.getValue("GITHUB_TOKEN")>"
+                      bash build_and_upload.sh "<+secrets.getValue("GITHUB_TOKEN")>"
                   timeout: ""
                   type: Run
           platform:
