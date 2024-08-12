@@ -629,13 +629,6 @@ jobs:
 workflows:
   version: 2
   everyday:
-    triggers:
-    - schedule:
-        cron: "0 12 * * *"
-        filters:
-          branches:
-            only:
-            - main
     jobs:
     - build_oracle
     - build_rockylinux
@@ -649,4 +642,10 @@ workflows:
     - build_alpine
     - build_archlinux
     - build_almalinux
-
+    triggers:
+    - schedule:
+        cron: "0 12 * * *"
+        filters:
+          branches:
+            only:
+            - main
