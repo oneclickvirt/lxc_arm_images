@@ -628,7 +628,7 @@ jobs:
 
 workflows:
   version: 2
-  nightly:
+  everyday:
     triggers:
     - schedule:
         cron: "0 12 * * *"
