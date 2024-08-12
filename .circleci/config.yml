@@ -631,11 +631,11 @@ workflows:
   nightly:
     triggers:
     - schedule:
-      cron: "0 12 * * *"
-      filters:
-        branches:
-          only:
-          - main
+        cron: "0 12 * * *"
+        filters:
+          branches:
+            only:
+            - main
     jobs:
     - build_oracle
     - build_rockylinux
