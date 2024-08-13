@@ -8,7 +8,7 @@ fi
 GITHUB_TOKEN="$1"
 echo "Checking GITHUB_TOKEN (first 4 characters): ${GITHUB_TOKEN:0:4}"
 
-distros=("ubuntu" "openeuler")
+distros=("ubuntu" "oracle" "openeuler")
 for distro in "${distros[@]}"; do
     echo "Processing distro: $distro"
     zip_name_list=($(bash build_images.sh $distro false arm64 | tail -n 1))
