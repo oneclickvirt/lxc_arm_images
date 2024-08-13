@@ -2,10 +2,6 @@
 
 [![clone yaml](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/clone_yaml.yml/badge.svg)](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/clone_yaml.yml) [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/H6Qc8d5hscKSNUA7iZJWUh/VhX2bFEC9oXyCqegi8jbDJ/tree/main.svg?style=shield&circle-token=229a9fc5f8d0fd8059bca2f249cbc823c6cb763e)](https://dl.circleci.com/status-badge/redirect/circleci/H6Qc8d5hscKSNUA7iZJWUh/VhX2bFEC9oXyCqegi8jbDJ/tree/main)
 
-oracle 和 openeuler 由于耗时过长，可能某些日期的运行时长超过了免费时长，没有及时的更新，其他镜像无问题
-
-oracle and openeuler may be running longer than the free hours on some dates due to time consuming and not updated in a timely manner, other mirrors are fine.
-
 ## 说明
 
 Releases中的镜像(每日拉取镜像进行自动修补和更新)：
