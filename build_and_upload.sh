@@ -1,11 +1,10 @@
 #!/bin/bash
 
-if [ -z "$1" ]; then
-    echo "Error: GITHUB_TOKEN not provided"
-    exit 1
+if [[ "$GITHUB_TOKEN" == "" ]]; then
+  echo "Please provide GitHub access token via GITHUB_TOKEN environment variable!"
+  exit 1
 fi
 
-GITHUB_TOKEN="$1"
 echo "Checking GITHUB_TOKEN (first 4 characters): ${GITHUB_TOKEN:0:4}"
 
 distros=("ubuntu" "oracle" "openeuler")
