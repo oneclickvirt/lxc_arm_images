@@ -162,7 +162,7 @@ rm -rf openwrt.yaml
 wget https://raw.githubusercontent.com/lxc/lxc-ci/main/images/openwrt.yaml
 chmod 777 openwrt.yaml
 # cronie 不可用 cron 不可用
-insert_content_1="    - curl\n    - wget\n    - bash\n    - lsof\n    - sshpass\n    - openssh-server\n    - openssh-keygen\n    - iptables\n    - dos2unix"
+insert_content_1="    - curl\n    - wget\n    - bash\n    - lsof\n    - sshpass\n    - openssh-server\n    - openssh-keygen\n    - iptables"
 sed -i "/- sudo/ a\\$insert_content_1" openwrt.yaml
 insert_content_2=$(cat /home/runner/work/lxc_arm_images/lxc_arm_images/sh_insert_content.text)
 cat openwrt.yaml > temp.yaml
