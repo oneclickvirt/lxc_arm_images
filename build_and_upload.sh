@@ -7,8 +7,9 @@ fi
 
 echo "Checking GITHUB_TOKEN (first 4 characters): ${GITHUB_TOKEN:0:4}"
 
+apt-get install -y sudo
 sudo apt-get update
-sudo apt-get install -y sudo zip jq snapd debootstrap
+sudo apt-get install -y zip jq snapd debootstrap
 sudo snap install distrobuilder --classic
 
 distros=("ubuntu" "oracle" "openeuler")
