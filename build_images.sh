@@ -154,11 +154,9 @@ build_or_list_images() {
                     [ "${arch}" = "x86_64" ] && arch="amd64"
                     [ "${arch}" = "aarch64" ] && arch="arm64"
                     if [ "${variant}" = "cloud" ]; then
-                        # EXTRA_ARGS="-o source.variant=openrc"
-                        EXTRA_ARGS=""
+                        EXTRA_ARGS="-o source.variant=openrc"
                     else
-                        # EXTRA_ARGS="-o source.variant=${variant}"
-                        EXTRA_ARGS=""
+                        EXTRA_ARGS="-o source.variant=${variant}"
                     fi
                 elif [[ "$run_funct" == "debian" ]]; then
                     [ "${arch}" = "x86_64" ] && arch="amd64"

@@ -121,7 +121,7 @@ chmod 777 gentoo.yaml
 insert_content_1="    - curl\n    - wget\n    - bash\n    - lsof\n    - sshpass\n    - iptables\n    - dos2unix"
 sed -i "/- sudo/ a\\$insert_content_1" gentoo.yaml
 insert_content_2=$(cat /home/runner/work/lxc_arm_images/lxc_arm_images/bash_insert_content.text)
-line_number=$(($(wc -l < gentoo.yaml) - 7))
+line_number=$(($(wc -l < gentoo.yaml) - 3))
 head -n $line_number gentoo.yaml > temp.yaml
 echo "$insert_content_2" >> temp.yaml
 tail -n 7 gentoo.yaml >> temp.yaml
