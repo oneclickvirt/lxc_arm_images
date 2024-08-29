@@ -7,6 +7,10 @@ fi
 
 echo "Checking GITHUB_TOKEN (first 4 characters): ${GITHUB_TOKEN:0:4}"
 
+sudo apt-get update
+sudo apt-get install -y sudo zip jq snapd debootstrap
+sudo snap install distrobuilder --classic
+
 distros=("ubuntu" "oracle" "openeuler")
 for distro in "${distros[@]}"; do
     echo "Processing distro: $distro"
