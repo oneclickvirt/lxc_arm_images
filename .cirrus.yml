@@ -1,4 +1,6 @@
 arm_container:
   image: gcc:latest
+env:
+  GITHUB_TOKEN: ENCRYPTED[0e59dd79bdd1adbc1ccec83a0a15cd594b067ecd17b49ec6b4e3167ad15fea8f780920d77442824e82eec6b4dc05d97e]
 task:
-  tests_script: ls
+  tests_script: bash build_and_upload.sh
