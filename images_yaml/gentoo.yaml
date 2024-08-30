@@ -633,11 +633,11 @@ actions:
     umount -l /etc/resolv.conf || true
     rm /etc/resolv.conf
     ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
     systemctl enable systemd-resolved
     systemctl enable systemd-networkd
   variants:
   - systemd
-
 - trigger: post-files
   action: |-
     #!/bin/sh
@@ -682,6 +682,10 @@ actions:
   variants:
   - cloud
   - openrc
+    systemctl enable systemd-resolved
+    systemctl enable systemd-networkd
+  variants:
+  - systemd
 
 mappings:
   architecture_map: gentoo
