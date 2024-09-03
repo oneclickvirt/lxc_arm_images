@@ -256,40 +256,6 @@ jobs:
             command: |
               chmod 777 build_and_upload.sh
               ./build_and_upload.sh $GITHUB_TOKEN oracle second
-  build_openeuler_first:
-      machine:
-        image: ubuntu-2204:2024.01.1
-      resource_class: arm.large
-      steps:
-        - checkout
-        - run:
-            name: Install dependencies
-            command: |
-              sudo apt-get update
-              sudo apt-get install -y sudo zip jq snapd debootstrap
-              sudo snap install distrobuilder --classic
-        - run:
-            name: Build and upload images
-            command: |
-              chmod 777 build_and_upload.sh
-              ./build_and_upload.sh $GITHUB_TOKEN openeuler first
-  build_openeuler_second:
-      machine:
-        image: ubuntu-2204:2024.01.1
-      resource_class: arm.large
-      steps:
-        - checkout
-        - run:
-            name: Install dependencies
-            command: |
-              sudo apt-get update
-              sudo apt-get install -y sudo zip jq snapd debootstrap
-              sudo snap install distrobuilder --classic
-        - run:
-            name: Build and upload images
-            command: |
-              chmod 777 build_and_upload.sh
-              ./build_and_upload.sh $GITHUB_TOKEN openeuler second
 
 workflows:
   version: 2
@@ -310,5 +276,5 @@ workflows:
     - build_ubuntu_second
     - build_oracle_first
     - build_oracle_second
-    - build_openeuler_first
-    - build_openeuler_second
+    # - build_openeuler_first
+    # - build_openeuler_second
