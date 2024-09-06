@@ -124,7 +124,7 @@ insert_content_2=$(cat /home/runner/work/lxc_arm_images/lxc_arm_images/bash_inse
 line_number=$(($(wc -l < gentoo.yaml) - 3))
 head -n $line_number gentoo.yaml > temp.yaml
 echo "$insert_content_2" >> temp.yaml
-tail -n 7 gentoo.yaml >> temp.yaml
+tail -n 3 gentoo.yaml >> temp.yaml
 mv temp.yaml gentoo.yaml
 sed -i -e '/environment:/i \ ' gentoo.yaml
 sed -i 's/- default/- openrc/g' gentoo.yaml
