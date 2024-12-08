@@ -71,3 +71,4 @@ fedora_40_40_arm64_cloud.tar.xz
 alpine_3.20_3.20_arm64_cloud.tar.xz
 opensuse_15.6_15.6_arm64_default.tar.xz
 opensuse_15.6_15.6_arm64_cloud.tar.xz
+alpine_3.21_3.21_arm64_cloud.tar.xz
