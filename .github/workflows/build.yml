@@ -14,8 +14,8 @@ jobs:
         arch:
           - name: arm64
             runner: ubuntu-24.04-arm
-          - name: amd64
-            runner: ubuntu-latest
+          # - name: amd64
+          #   runner: ubuntu-latest
     runs-on: ${{ matrix.arch.runner }}
     timeout-minutes: 150
     steps:
