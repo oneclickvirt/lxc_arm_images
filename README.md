@@ -1,6 +1,6 @@
 # lxc_arm_images
 
-[![clone yaml](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/clone_yaml.yml/badge.svg)](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/clone_yaml.yml) [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/H6Qc8d5hscKSNUA7iZJWUh/VhX2bFEC9oXyCqegi8jbDJ/tree/main.svg?style=shield&circle-token=229a9fc5f8d0fd8059bca2f249cbc823c6cb763e)](https://dl.circleci.com/status-badge/redirect/circleci/H6Qc8d5hscKSNUA7iZJWUh/VhX2bFEC9oXyCqegi8jbDJ/tree/main)
+[![clone yaml](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/clone_yaml.yml/badge.svg)](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/clone_yaml.yml)
 
 ## 说明
 

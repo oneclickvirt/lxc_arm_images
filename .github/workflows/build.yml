@@ -1,0 +1,97 @@
+name: Multi-Distro Images Builder
+
+on:
+  schedule:
+    - cron: '0 14 1-31/2 * *'
+  workflow_dispatch:
+jobs:
+  build-images:
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        distro: ["debian", "kali", "centos", "almalinux", "rockylinux", "fedora", "opensuse", "alpine", "archlinux", "gentoo", "openwrt", "oracle", "openeuler", "ubuntu"]
+        arch:
+          - name: arm64
+            runner: ubuntu-24.04-arm
+          - name: amd64
+            runner: ubuntu-latest
+    runs-on: ${{ matrix.arch.runner }}
+    timeout-minutes: 360
+    steps:
+    - uses: actions/checkout@v4
+    - name: Check workspace
+      run: pwd
+    - name: Build environment
+      run: |
+        sudo apt update -y
+        sudo apt install -y polkit || sudo apt install -y policykit-1
+        sudo apt install -y jq snapd debootstrap
+        sudo snap install distrobuilder --classic
+    - name: Configure Git Identity
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+    - name: Build and Upload Images
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        set +e  # 禁止错误退出
+        # 获取构建参数
+        DISTRO="${{ matrix.distro }}"
+        ARCH="${{ matrix.arch.name }}"
+        echo "处理 $DISTRO 的 $ARCH 架构镜像"
+        # 首次运行获取文件名列表
+        echo "---获取文件列表---"
+        output=$(bash build_images.sh $DISTRO false $ARCH | tail -n 1)
+        zip_name_list=($output)  # 让shell自动按空格分割
+        echo "将创建的文件列表:"
+        for item in "${zip_name_list[@]}"; do
+          echo "$item"
+        done
+        # 获取或创建Release
+        release_response=$(curl -sS -H "Authorization: Bearer $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          "https://api.github.com/repos/oneclickvirt/lxc_arm_images/releases/tags/$DISTRO" || true)
+        if [ "$(jq -r '.id' <<< "$release_response")" == "null" ]; then
+          echo "为 $DISTRO 创建新的Release"
+          release_response=$(curl -sS -X POST -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d '{"tag_name":"'"$DISTRO"'", "name":"'"$DISTRO Images"'", "generate_release_notes":true}' \
+            "https://api.github.com/repos/oneclickvirt/lxc_arm_images/releases" || true)
+        fi
+        release_id=$(jq -r '.id' <<< "$release_response")
+        echo "Release ID: $release_id"
+        # 执行实际构建
+        echo "正在构建 $DISTRO 的 $ARCH 架构镜像"
+        bash build_images.sh $DISTRO true $ARCH
+        # 处理构建产物
+        for file in "${zip_name_list[@]}"; do
+          if [ -f "$file" ] && [ $(stat -c %s "$file") -gt 10485760 ]; then
+            echo "处理文件 $file (大小: $(numfmt --to=iec-i --suffix=B $(stat -c %s "$file")))"
+            # 检查现有资产
+            asset_name=$(basename "$file")
+            existing_asset=$(curl -sS -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/oneclickvirt/lxc_arm_images/releases/$release_id/assets" \
+              | jq -r --arg name "$asset_name" '.[] | select(.name == $name)')
+            # 删除已存在的资产
+            if [ -n "$existing_asset" ]; then
+              asset_id=$(jq -r '.id' <<< "$existing_asset")
+              echo "删除已存在的资产 ID $asset_id"
+              curl -sS -X DELETE -H "Authorization: Bearer $GITHUB_TOKEN" \
+                "https://api.github.com/repos/oneclickvirt/lxc_arm_images/releases/assets/$asset_id" || true
+            fi
+            # 上传新资产
+            echo "上传 $asset_name..."
+            curl -sS -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Content-Type: application/zip" \
+              --data-binary @"$file" \
+              "https://uploads.github.com/repos/oneclickvirt/lxc_arm_images/releases/$release_id/assets?name=$asset_name" || true
+            
+            rm -f "$file"
+          else
+            echo "跳过 $file - 文件不存在或小于10MB"
+            [ -f "$file" ] && rm -f "$file"
+          fi
+        done
+      continue-on-error: true
