@@ -72,3 +72,7 @@ alpine_3.20_3.20_arm64_cloud.tar.xz
 opensuse_15.6_15.6_arm64_default.tar.xz
 opensuse_15.6_15.6_arm64_cloud.tar.xz
 alpine_3.21_3.21_arm64_cloud.tar.xz
+openeuler_24.03_24.03_arm64_default.tar.xz
+openeuler_24.03_24.03_arm64_cloud.tar.xz
+openeuler_25.03_25.03_arm64_default.tar.xz
+openeuler_25.03_25.03_arm64_cloud.tar.xz
