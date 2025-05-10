@@ -27,7 +27,8 @@ jobs:
         sudo apt update -y
         sudo apt install -y polkit || sudo apt install -y policykit-1
         sudo apt install -y jq snapd debootstrap
-        sleep 60
+        sudo systemctl start snapd
+        sleep 10
         sudo snap install distrobuilder --classic || sudo snap install distrobuilder --classic --edge
     - name: Configure Git Identity
       run: |
