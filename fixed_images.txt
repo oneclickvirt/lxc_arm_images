@@ -55,6 +55,7 @@ alpine_3.19_3.19_arm64_cloud.tar.xz
 alpine_edge_edge_arm64_cloud.tar.xz
 alpine_3.20_3.20_arm64_cloud.tar.xz
 alpine_3.21_3.21_arm64_cloud.tar.xz
+alpine_3.22_3.22_arm64_cloud.tar.xz
 archlinux_current_current_arm64_default.tar.xz
 archlinux_current_current_arm64_cloud.tar.xz
 gentoo_current_current_arm64_cloud.tar.xz

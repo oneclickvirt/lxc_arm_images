@@ -1,4 +1,4 @@
-Sun Jun  8 01:18:39 UTC 2025
+Mon Jun  9 01:15:52 UTC 2025
 ------------------------------------------
 ubuntu_18.04_bionic_arm64_default.tar.xz
 ------------------------------------------
@@ -113,6 +113,8 @@ alpine_edge_edge_arm64_cloud.tar.xz
 alpine_3.20_3.20_arm64_cloud.tar.xz
 ------------------------------------------
 alpine_3.21_3.21_arm64_cloud.tar.xz
+------------------------------------------
+alpine_3.22_3.22_arm64_cloud.tar.xz
 ------------------------------------------
 archlinux_current_current_arm64_default.tar.xz
 ------------------------------------------
