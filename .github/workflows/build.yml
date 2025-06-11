@@ -2,7 +2,7 @@ name: Multi-Distro Images Builder
 
 on:
   schedule:
-    - cron: '0 10 18 * *'
+    - cron: '0 18 * * *'
   workflow_dispatch:
 jobs:
   build-images:
