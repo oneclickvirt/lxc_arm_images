@@ -1,5 +1,7 @@
 # lxc_arm_images
 
+[![Downloads](https://ghdownload.spiritlhl.net/oneclickvirt/lxc_arm_images?color=00c62d)](https://github.com/oneclickvirt/lxc_arm_images/releases)
+
 [![clone yaml](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/clone_yaml.yml/badge.svg)](https://github.com/oneclickvirt/lxc_arm_images/actions/workflows/clone_yaml.yml)
 
 ## 说明
