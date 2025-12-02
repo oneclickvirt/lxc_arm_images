@@ -78,3 +78,5 @@ openeuler_24.03_24.03_arm64_default.tar.xz
 openeuler_24.03_24.03_arm64_cloud.tar.xz
 openeuler_25.03_25.03_arm64_default.tar.xz
 openeuler_25.03_25.03_arm64_cloud.tar.xz
+openeuler_25.09_25.09_arm64_default.tar.xz
+openeuler_25.09_25.09_arm64_cloud.tar.xz
