@@ -81,3 +81,4 @@ opensuse_16.0_16.0_arm64_default.tar.xz
 opensuse_16.0_16.0_arm64_cloud.tar.xz
 openeuler_25.09_25.09_arm64_default.tar.xz
 openeuler_25.09_25.09_arm64_cloud.tar.xz
+alpine_3.23_3.23_arm64_cloud.tar.xz
