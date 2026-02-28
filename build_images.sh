@@ -6,7 +6,7 @@ is_build_image="${2:-false}"
 build_arch="${3:-arm64}"
 zip_name_list=()
 opath=$(pwd)
-rm -rf *.tar.xz
+[ "$is_build_image" == true ] && rm -rf *.tar.xz
 ls
 # 检查并安装依赖工具
 if command -v apt-get >/dev/null 2>&1; then
@@ -59,10 +59,11 @@ if command -v apt-get >/dev/null 2>&1; then
             git clone https://github.com/lxc/distrobuilder
             cd ./distrobuilder
             make
-            export PATH=$HOME/goprojects/bin/distrobuilder:$PATH
+            export PATH=$HOME/goprojects/bin:$PATH
             echo $PATH
             find $HOME -name distrobuilder -type f 2>/dev/null
             $HOME/goprojects/bin/distrobuilder --version
+            cd "$opath"
         fi
         # wget https://api.ilolicon.com/distrobuilder.deb
         # dpkg -i distrobuilder.deb
@@ -243,10 +244,10 @@ build_or_list_images() {
 # build_or_list_images 镜像名字 镜像版本号 variants的值
 case "$run_funct" in
 debian)
-    build_or_list_images "buster bullseye bookworm trixie" "10 11 12 13" "default cloud"
+    build_or_list_images "bullseye bookworm trixie" "11 12 13" "default cloud"
     ;;
 ubuntu)
-    build_or_list_images "bionic focal jammy lunar mantic noble" "18.04 20.04 22.04 23.04 23.10 24.04" "default cloud"
+    build_or_list_images "bionic focal jammy noble" "18.04 20.04 22.04 24.04" "default cloud"
     ;;
 kali)
     build_or_list_images "kali-rolling" "latest" "default cloud"
@@ -258,7 +259,7 @@ gentoo)
     build_or_list_images "current" "current" "cloud systemd openrc"
     ;;
 centos)
-    build_or_list_images "7 8-Stream 9-Stream" "7 8 9" "default cloud"
+    build_or_list_images "9-Stream" "9" "default cloud"
     ;;
 almalinux)
     URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-almalinux.yaml"

@@ -5,8 +5,8 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-echo "Checking GITHUB_TOKEN (first 4 characters): ${GITHUB_TOKEN:0:4}"
 GITHUB_TOKEN="$1"
+echo "Checking GITHUB_TOKEN (first 4 characters): ${GITHUB_TOKEN:0:4}"
 
 # apt-get update
 # apt-get install -y sudo
@@ -15,10 +15,14 @@ GITHUB_TOKEN="$1"
 
 # distros=("ubuntu" "oracle" "openeuler")
 distro="$2"
-if [ -n $distro ]; then
+if [ -n "$distro" ]; then
     echo "Processing distro: $distro"
     zip_name_list=($(bash build_images.sh $distro false arm64 | tail -n 1))
     release_id=$(curl -s -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/oneclickvirt/lxc_arm_images/releases/tags/$distro" | jq -r '.id')
+    if [ -z "$release_id" ] || [ "$release_id" == "null" ]; then
+        echo "Error: Release not found for $distro, skipping."
+        exit 1
+    fi
     echo "Building $distro and packge zips"
     bash build_images.sh $distro true arm64
     for file in "${zip_name_list[@]}"; do
