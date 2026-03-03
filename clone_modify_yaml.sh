@@ -114,6 +114,26 @@ echo "$insert_content_2" >> temp.yaml
 tail -n 2 archlinux.yaml >> temp.yaml
 mv temp.yaml archlinux.yaml
 sed -i -e '/mappings:/i \ ' archlinux.yaml
+# 修复 ARM 架构：移除会导致构建失败的 kernel/openssh remove 块，保留 openssh 安装
+python3 - <<'PYEOF'
+import re
+with open('archlinux.yaml', 'r') as f:
+    content = f.read()
+# 移除 linux-aarch64 remove 块（ARM bootstrap 中内核依赖复杂，移除可能失败）
+content = re.sub(
+    r'\n  - packages:\n    - linux-aarch64\n    action: remove\n    architectures:\n    - aarch64\n    types:\n    - container',
+    '', content)
+# 移除 linux-armv7 remove 块
+content = re.sub(
+    r'\n  - packages:\n    - linux-armv7\n    action: remove\n    architectures:\n    - armv7',
+    '', content)
+# 从 ARM remove 块中去掉 openssh（aarch64/armv7 构建需要 openssh 提供 sshd）
+content = re.sub(
+    r'(\n  - packages:\n    - libedit\n    - net-tools)\n    - openssh(\n    action: remove\n    architectures:\n    - aarch64\n    - armv7)',
+    r'\1\2', content)
+with open('archlinux.yaml', 'w') as f:
+    f.write(content)
+PYEOF
 
 # gentoo
 rm -rf gentoo.yaml
@@ -143,6 +163,8 @@ cat fedora.yaml > temp.yaml
 echo "" >> temp.yaml
 echo "$insert_content_2" >> temp.yaml
 mv temp.yaml fedora.yaml
+# fipscheck 在 Fedora 28+ 已被移除，保留会导致构建失败
+sed -i '/^    - fipscheck$/d' fedora.yaml
 
 # alpine
 rm -rf alpine.yaml

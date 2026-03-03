@@ -89,8 +89,10 @@ build_or_list_images() {
         for arch in "${architectures[@]}"; do
             for variant in "${variants[@]}"; do
                 # apk apt dnf egoportage opkg pacman portage yum equo xbps zypper luet slackpkg
-                if [[ "$run_funct" == "centos" || "$run_funct" == "fedora" || "$run_funct" == "openeuler" ]]; then
+                if [[ "$run_funct" == "centos" || "$run_funct" == "openeuler" ]]; then
                     manager="yum"
+                elif [[ "$run_funct" == "fedora" ]]; then
+                    manager="dnf"
                 elif [[ "$run_funct" == "kali" || "$run_funct" == "ubuntu" || "$run_funct" == "debian" ]]; then
                     manager="apt"
                 elif [[ "$run_funct" == "almalinux" || "$run_funct" == "rockylinux" || "$run_funct" == "oracle" ]]; then
@@ -262,14 +264,10 @@ centos)
     build_or_list_images "9-Stream" "9" "default cloud"
     ;;
 almalinux)
-    URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-almalinux.yaml"
-    curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-    build_or_list_images "$curl_output" "$curl_output" "default cloud"
+    build_or_list_images "8 9 10" "8 9 10" "default cloud"
     ;;
 rockylinux)
-    URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-rockylinux.yaml"
-    curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-    build_or_list_images "$curl_output" "$curl_output" "default cloud"
+    build_or_list_images "8 9 10" "8 9 10" "default cloud"
     ;;
 alpine)
     URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-alpine.yaml"
@@ -277,9 +275,7 @@ alpine)
     build_or_list_images "$curl_output" "$curl_output" "default cloud"
     ;;
 openwrt)
-    URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-openwrt.yaml"
-    curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-    build_or_list_images "$curl_output" "$curl_output" "default cloud"
+    build_or_list_images "23.05 24.10" "23.05 24.10" "default cloud"
     ;;
 oracle)
     URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-oracle.yaml"
@@ -287,9 +283,7 @@ oracle)
     build_or_list_images "$curl_output" "$curl_output" "default cloud"
     ;;
 fedora)
-    URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-fedora.yaml"
-    curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-    build_or_list_images "$curl_output" "$curl_output" "default cloud"
+    build_or_list_images "41 42" "41 42" "default cloud"
     ;;
 opensuse)
     URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-opensuse.yaml"

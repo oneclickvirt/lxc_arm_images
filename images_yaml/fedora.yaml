@@ -169,7 +169,6 @@ packages:
     - cpio
     - file
     - findutils
-    - fipscheck
     - gettext
     - glibc-all-langpacks
     - hardlink
