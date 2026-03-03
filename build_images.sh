@@ -129,10 +129,18 @@ build_or_list_images() {
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
                     EXTRA_ARGS="-o source.variant=boot"
+                    # Rocky Linux 10 GPG key 名称变更，跳过 ISO 来源验证
+                    if [ "$version" = "10" ]; then
+                        EXTRA_ARGS="$EXTRA_ARGS -o source.skip_verification=true"
+                    fi
                 elif [[ "$run_funct" == "almalinux" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
                     EXTRA_ARGS="-o source.variant=boot"
+                    # AlmaLinux 10 GPG key 名称变更，跳过 ISO 来源验证
+                    if [ "$version" = "10" ]; then
+                        EXTRA_ARGS="$EXTRA_ARGS -o source.skip_verification=true"
+                    fi
                 elif [[ "$run_funct" == "oracle" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
@@ -141,7 +149,8 @@ build_or_list_images() {
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
                     if [ "${arch}" != "amd64" ] && [ "${arch}" != "i386" ] && [ "${arch}" != "x86_64" ]; then
-                        EXTRA_ARGS="-o source.url=http://os.archlinuxarm.org"
+                        # archlinuxarm.org 仅支持 HTTP，需跳过 GPG 验证
+                        EXTRA_ARGS="-o source.url=http://os.archlinuxarm.org -o source.skip_verification=true"
                     fi
                 elif [[ "$run_funct" == "alpine" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
@@ -277,7 +286,8 @@ oracle)
     build_or_list_images "8 9" "8 9" "default cloud"
     ;;
 fedora)
-    build_or_list_images "41 42" "41 42" "default cloud"
+    # Fedora 42 尚未正式发布，暂只构建 40/41
+    build_or_list_images "40 41" "40 41" "default cloud"
     ;;
 opensuse)
     build_or_list_images "15.6 tumbleweed" "15.6 tumbleweed" "default cloud"

@@ -387,6 +387,28 @@ actions:
 - trigger: post-unpack
   action: |-
     #!/bin/sh
+    set -eux
+    # Rocky Linux 10 的 GPG key 文件名称为 RPM-GPG-KEY-Rocky-10，修复 repo 配置
+    key_file=""
+    for k in /etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-10 \
+              /etc/pki/rpm-gpg/RPM-GPG-KEY-rockylinux10 \
+              /etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial; do
+        [ -f "$k" ] && key_file="$k" && break
+    done
+    if [ -n "$key_file" ]; then
+        rpm --import "$key_file" || true
+        for repo in /etc/yum.repos.d/*.repo; do
+            sed -i "s|gpgkey=.*|gpgkey=file://$key_file|g" "$repo" || true
+        done
+    else
+        sed -i 's/gpgcheck=1/gpgcheck=0/g' /etc/yum.repos.d/*.repo || true
+    fi
+  releases:
+  - "10"
+
+- trigger: post-unpack
+  action: |-
+    #!/bin/sh
     # Make sure we have our template targets
     touch /etc/hosts
     touch /etc/hostname

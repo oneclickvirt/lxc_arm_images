@@ -3,7 +3,7 @@ image:
 
 source:
   downloader: fedora-http
-  url: https://kojipkgs.fedoraproject.org
+  url: https://dl.fedoraproject.org/pub/fedora/linux/releases
 
 targets:
   lxc:

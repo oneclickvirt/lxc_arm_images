@@ -73,6 +73,43 @@ cat almalinux.yaml > temp.yaml
 echo "" >> temp.yaml
 echo "$insert_content_2" >> temp.yaml
 mv temp.yaml almalinux.yaml
+# 修复 AlmaLinux 10 GPG key 名称变化问题
+python3 - <<'PYEOF'
+import re, sys
+with open('almalinux.yaml', 'r') as f:
+    content = f.read()
+# 在 actions: 节层前面插入 post-unpack 动作，为 release 10 修复 repos 中的 GPG key 路径
+gpg_fix_action = """
+- trigger: post-unpack
+  action: |-
+    #!/bin/sh
+    set -eux
+    # AlmaLinux 10 的 GPG key 文件名称变更，修复 repo 中的 gpgkey 引用
+    key_file=""
+    for k in /etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux-10 \
+              /etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux10 \
+              /etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux; do
+        [ -f "$k" ] && key_file="$k" && break
+    done
+    if [ -n "$key_file" ]; then
+        rpm --import "$key_file" || true
+        for repo in /etc/yum.repos.d/*.repo; do
+            sed -i "s|gpgkey=.*|gpgkey=file://$key_file|g" "$repo" || true
+        done
+    else
+        # 找不到对应 key 时临时关闭 gpgcheck
+        sed -i 's/gpgcheck=1/gpgcheck=0/g' /etc/yum.repos.d/*.repo || true
+    fi
+  releases:
+  - "10"
+"""
+# 在第一个 'actions:' 标记后插入
+insert_pos = content.find('\nactions:')
+if insert_pos != -1:
+    content = content[:insert_pos] + gpg_fix_action + content[insert_pos:]
+with open('almalinux.yaml', 'w') as f:
+    f.write(content)
+PYEOF
 
 # rockylinux
 rm -rf rockylinux.yaml
@@ -86,6 +123,41 @@ cat rockylinux.yaml > temp.yaml
 echo "" >> temp.yaml
 echo "$insert_content_2" >> temp.yaml
 mv temp.yaml rockylinux.yaml
+# 修复 Rocky Linux 10 GPG key 名称变化问题
+python3 - <<'PYEOF'
+import re, sys
+with open('rockylinux.yaml', 'r') as f:
+    content = f.read()
+gpg_fix_action = """
+- trigger: post-unpack
+  action: |-
+    #!/bin/sh
+    set -eux
+    # Rocky Linux 10 的 GPG key 文件名称为 RPM-GPG-KEY-Rocky-10
+    key_file=""
+    for k in /etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-10 \
+              /etc/pki/rpm-gpg/RPM-GPG-KEY-rockylinux10 \
+              /etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial; do
+        [ -f "$k" ] && key_file="$k" && break
+    done
+    if [ -n "$key_file" ]; then
+        rpm --import "$key_file" || true
+        for repo in /etc/yum.repos.d/*.repo; do
+            sed -i "s|gpgkey=.*|gpgkey=file://$key_file|g" "$repo" || true
+        done
+    else
+        # 找不到对应 key 时临时关闭 gpgcheck
+        sed -i 's/gpgcheck=1/gpgcheck=0/g' /etc/yum.repos.d/*.repo || true
+    fi
+  releases:
+  - "10"
+"""
+insert_pos = content.find('\nactions:')
+if insert_pos != -1:
+    content = content[:insert_pos] + gpg_fix_action + content[insert_pos:]
+with open('rockylinux.yaml', 'w') as f:
+    f.write(content)
+PYEOF
 
 # oracle
 rm -rf oracle.yaml
@@ -165,6 +237,9 @@ echo "$insert_content_2" >> temp.yaml
 mv temp.yaml fedora.yaml
 # fipscheck 在 Fedora 28+ 已被移除，保留会导致构建失败
 sed -i '/^    - fipscheck$/d' fedora.yaml
+# 将 Koji 源地址改为 Fedora 官方直连地址，解决 fedora-http 下载器在新版本上报
+# "Unable to find latest build" 的问题
+sed -i 's|url: https://kojipkgs.fedoraproject.org|url: https://dl.fedoraproject.org/pub/fedora/linux/releases|g' fedora.yaml
 
 # alpine
 rm -rf alpine.yaml
@@ -272,7 +347,8 @@ build_or_list_images "23.05 24.10" "23.05 24.10" "default cloud"
 run_funct="oracle"
 build_or_list_images "8 9" "8 9" "default cloud"
 run_funct="fedora"
-build_or_list_images "41 42" "41 42" "default cloud"
+# Fedora 42 尚未正式发布（预计 2026-04），暂只构建 41
+build_or_list_images "40 41" "40 41" "default cloud"
 run_funct="opensuse"
 build_or_list_images "15.6 tumbleweed" "15.6 tumbleweed" "default cloud"
 run_funct="openeuler"
