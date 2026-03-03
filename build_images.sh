@@ -136,9 +136,7 @@ build_or_list_images() {
                 elif [[ "$run_funct" == "oracle" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
-                    if [[ "$version" == "9" ]]; then
-                        EXTRA_ARGS="-o source.url=https://yum.oracle.com/ISOS/OracleLinux"
-                    fi
+                    EXTRA_ARGS="-o source.url=https://yum.oracle.com/ISOS/OracleLinux"
                 elif [[ "$run_funct" == "archlinux" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
@@ -270,30 +268,22 @@ rockylinux)
     build_or_list_images "8 9 10" "8 9 10" "default cloud"
     ;;
 alpine)
-    URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-alpine.yaml"
-    curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-    build_or_list_images "$curl_output" "$curl_output" "default cloud"
+    build_or_list_images "3.19 3.20 3.21" "3.19 3.20 3.21" "default cloud"
     ;;
 openwrt)
     build_or_list_images "23.05 24.10" "23.05 24.10" "default cloud"
     ;;
 oracle)
-    URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-oracle.yaml"
-    curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-    build_or_list_images "$curl_output" "$curl_output" "default cloud"
+    build_or_list_images "8 9" "8 9" "default cloud"
     ;;
 fedora)
     build_or_list_images "41 42" "41 42" "default cloud"
     ;;
 opensuse)
-    URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-opensuse.yaml"
-    curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-    build_or_list_images "$curl_output" "$curl_output" "default cloud"
+    build_or_list_images "15.6 tumbleweed" "15.6 tumbleweed" "default cloud"
     ;;
 openeuler)
-    URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-openeuler.yaml"
-    curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-    build_or_list_images "$curl_output" "$curl_output" "default cloud"
+    build_or_list_images "22.03 24.03" "22.03 24.03" "default cloud"
     ;;
 *)
     echo "Invalid distribution specified."

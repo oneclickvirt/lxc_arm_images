@@ -262,37 +262,21 @@ build_or_list_images "current" "current" "cloud systemd openrc"
 run_funct="centos"
 build_or_list_images "9-Stream" "9" "default cloud"
 run_funct="almalinux"
-URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-almalinux.yaml"
-curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-build_or_list_images "$curl_output" "$curl_output" "default cloud"
+build_or_list_images "8 9 10" "8 9 10" "default cloud"
 run_funct="rockylinux"
-URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-rockylinux.yaml"
-curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-build_or_list_images "$curl_output" "$curl_output" "default cloud"
+build_or_list_images "8 9 10" "8 9 10" "default cloud"
 run_funct="alpine"
-URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-alpine.yaml"
-curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-build_or_list_images "$curl_output" "$curl_output" "default cloud"
+build_or_list_images "3.19 3.20 3.21" "3.19 3.20 3.21" "default cloud"
 run_funct="openwrt"
-URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-openwrt.yaml"
-curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-build_or_list_images "$curl_output" "$curl_output" "default cloud"
+build_or_list_images "23.05 24.10" "23.05 24.10" "default cloud"
 run_funct="oracle"
-URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-oracle.yaml"
-curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-build_or_list_images "$curl_output" "$curl_output" "default cloud"
+build_or_list_images "8 9" "8 9" "default cloud"
 run_funct="fedora"
-URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-fedora.yaml"
-curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-build_or_list_images "$curl_output" "$curl_output" "default cloud"
+build_or_list_images "41 42" "41 42" "default cloud"
 run_funct="opensuse"
-URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-opensuse.yaml"
-curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-build_or_list_images "$curl_output" "$curl_output" "default cloud"
+build_or_list_images "15.6 tumbleweed" "15.6 tumbleweed" "default cloud"
 run_funct="openeuler"
-URL="https://raw.githubusercontent.com/lxc/lxc-ci/main/jenkins/jobs/image-openeuler.yaml"
-curl_output=$(curl -s "$URL" | awk '/name: release/{flag=1; next} /^$/{flag=0} flag && /^ *-/{if (!first) {printf "%s", $2; first=1} else {printf " %s", $2}}' | sed 's/"//g')
-build_or_list_images "$curl_output" "$curl_output" "default cloud"
+build_or_list_images "22.03 24.03" "22.03 24.03" "default cloud"
 # 去除重复行
 remove_duplicate_lines() {
     # 预处理：去除行尾空格和制表符
