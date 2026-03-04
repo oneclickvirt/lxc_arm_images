@@ -383,16 +383,13 @@ packages:
     architectures:
     - aaarch64
 
-actions:
 - trigger: post-unpack
   action: |-
     #!/bin/sh
     set -eux
-    # Rocky Linux 10 的 GPG key 文件名称为 RPM-GPG-KEY-Rocky-10，修复 repo 配置
+    # Rocky Linux 10 的 GPG key 文件名称为 RPM-GPG-KEY-Rocky-10
     key_file=""
-    for k in /etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-10 \
-              /etc/pki/rpm-gpg/RPM-GPG-KEY-rockylinux10 \
-              /etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial; do
+    for k in /etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-10               /etc/pki/rpm-gpg/RPM-GPG-KEY-rockylinux10               /etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial; do
         [ -f "$k" ] && key_file="$k" && break
     done
     if [ -n "$key_file" ]; then
@@ -401,11 +398,13 @@ actions:
             sed -i "s|gpgkey=.*|gpgkey=file://$key_file|g" "$repo" || true
         done
     else
+        # 找不到对应 key 时临时关闭 gpgcheck
         sed -i 's/gpgcheck=1/gpgcheck=0/g' /etc/yum.repos.d/*.repo || true
     fi
   releases:
   - "10"
 
+actions:
 - trigger: post-unpack
   action: |-
     #!/bin/sh

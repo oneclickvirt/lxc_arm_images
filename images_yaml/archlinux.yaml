@@ -204,9 +204,15 @@ packages:
     types:
     - vm
 
+
+
   - packages:
-    - openssh
-    action: install
+    - libedit
+    - net-tools
+    action: remove
+    architectures:
+    - aarch64
+    - armv7
 
   - packages:
     - linux-firmware
@@ -234,24 +240,6 @@ actions:
 
     # Update pacman-keyring to ensure package installs will not break because of GPG issues
     pacman -Sy --needed --noconfirm archlinux-keyring
-
-- trigger: post-packages
-  action: |-
-    #!/bin/sh
-    # Remove ARM bootstrap kernel packages from containers if present
-    pacman -R --noconfirm linux-aarch64 2>/dev/null || true
-  architectures:
-  - aarch64
-  types:
-  - container
-
-- trigger: post-packages
-  action: |-
-    #!/bin/sh
-    # Remove ARM bootstrap kernel and unused packages if present
-    pacman -R --noconfirm linux-armv7 libedit net-tools 2>/dev/null || true
-  architectures:
-  - armv7
 
 - trigger: post-packages
   action: |-
