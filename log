@@ -1,4 +1,4 @@
-Wed Mar  4 01:28:44 UTC 2026
+Thu Mar  5 01:43:16 UTC 2026
 ------------------------------------------
 ubuntu_18.04_bionic_arm64_default.tar.xz
 ------------------------------------------
@@ -33,6 +33,8 @@ debian_11_bullseye_arm64_default.tar.xz
 debian_11_bullseye_arm64_cloud.tar.xz
 ------------------------------------------
 debian_12_bookworm_arm64_default.tar.xz
+------------------------------------------
+debian_12_bookworm_arm64_cloud.tar.xz
 ------------------------------------------
 debian_13_trixie_arm64_default.tar.xz
 ------------------------------------------
