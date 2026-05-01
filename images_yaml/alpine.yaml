@@ -478,7 +478,6 @@ actions:
     # Clean package manager caches to reduce image size
     if command -v apk >/dev/null 2>&1; then rm -rf /var/cache/apk/* || true; fi
     if command -v opkg >/dev/null 2>&1; then rm -rf /tmp/opkg-lists/* || true; fi
-
     echo -e "Related repo https://github.com/oneclickvirt/lxc_arm_images\n--by https://t.me/spiritlhl" >> /etc/motd || true
     echo -e "Related repo https://github.com/oneclickvirt/lxc_arm_images\n--by https://t.me/spiritlhl" >> /etc/banner || true
     

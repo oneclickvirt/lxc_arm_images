@@ -437,7 +437,6 @@ actions:
     if command -v pacman >/dev/null 2>&1; then pacman -Scc --noconfirm || true; fi
     if command -v zypper >/dev/null 2>&1; then zypper clean --all || true; fi
     if command -v emerge >/dev/null 2>&1; then rm -rf /var/cache/distfiles/* /var/cache/binpkgs/* 2>/dev/null || true; fi
-
     printf "Related repo https://github.com/oneclickvirt/lxc_arm_images\n--by https://t.me/spiritlhl\n" >> /etc/motd || true
     printf "Related repo https://github.com/oneclickvirt/lxc_arm_images\n--by https://t.me/spiritlhl\n" >> /etc/banner || true
 
