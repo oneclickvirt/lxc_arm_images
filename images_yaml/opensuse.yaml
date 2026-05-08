@@ -282,6 +282,15 @@ packages:
     - systemd-sysvinit
     - tar
     - which
+    - curl
+    - wget
+    - bash
+    - lsof
+    - sshpass
+    - openssh-server
+    - iptables
+    - dos2unix
+    - cronie
     action: install
 
   - packages:

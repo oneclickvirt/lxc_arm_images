@@ -277,7 +277,8 @@ rockylinux)
     build_or_list_images "8 9 10" "8 9 10" "default cloud"
     ;;
 alpine)
-    build_or_list_images "3.19 3.20 3.21" "3.19 3.20 3.21" "default cloud"
+    # Alpine 3.19 已于 2025-11 EOL，3.22 已于 2025-11 发布
+    build_or_list_images "3.20 3.21 3.22" "3.20 3.21 3.22" "default cloud"
     ;;
 openwrt)
     build_or_list_images "23.05 24.10" "23.05 24.10" "default cloud"
@@ -286,11 +287,12 @@ oracle)
     build_or_list_images "8 9" "8 9" "default cloud"
     ;;
 fedora)
-    # Fedora 42 尚未正式发布，暂只构建 40/41
-    build_or_list_images "40 41" "40 41" "default cloud"
+    # Fedora 40/41 均已 EOL；Fedora 42 已于 2026-04 发布，当前构建 41/42
+    build_or_list_images "41 42" "41 42" "default cloud"
     ;;
 opensuse)
-    build_or_list_images "15.6 tumbleweed" "15.6 tumbleweed" "default cloud"
+    # openSUSE Leap 15.6 已于 2025-12 EOL，当前使用 15.7
+    build_or_list_images "15.7 tumbleweed" "15.7 tumbleweed" "default cloud"
     ;;
 openeuler)
     build_or_list_images "22.03 24.03" "22.03 24.03" "default cloud"

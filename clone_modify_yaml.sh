@@ -40,6 +40,8 @@ wget https://raw.githubusercontent.com/lxc/lxc-ci/main/images/kali.yaml
 chmod 777 kali.yaml
 insert_content_1="    - curl\n    - wget\n    - bash\n    - lsof\n    - sshpass\n    - openssh-server\n    - iptables\n    - dos2unix\n    - cron"
 sed -i "/- systemd/ a\\$insert_content_1" kali.yaml
+# Replace upstream ifupdown with ifupdown2 for the default variant
+sed -i 's/^    - ifupdown$/    - ifupdown2/' kali.yaml
 insert_content_2=$(cat $BASE_DIR/bash_insert_content.text)
 line_number=$(($(wc -l < kali.yaml) - 2))
 head -n $line_number kali.yaml > temp.yaml
@@ -272,9 +274,9 @@ mv temp.yaml openwrt.yaml
 rm -rf opensuse.yaml
 wget https://raw.githubusercontent.com/lxc/lxc-ci/main/images/opensuse.yaml
 chmod 777 opensuse.yaml
-# cron 不可用
+# cron 不可用；原 vim-minimal 锚点已被上游移除，改用 which
 insert_content_1="    - curl\n    - wget\n    - bash\n    - lsof\n    - sshpass\n    - openssh-server\n    - iptables\n    - dos2unix\n    - cronie"
-sed -i "/- vim-minimal/ a\\$insert_content_1" opensuse.yaml
+sed -i "/- which/ a\\$insert_content_1" opensuse.yaml
 insert_content_2=$(cat $BASE_DIR/bash_insert_content.text)
 cat opensuse.yaml > temp.yaml
 echo "" >> temp.yaml
@@ -341,16 +343,18 @@ build_or_list_images "8 9 10" "8 9 10" "default cloud"
 run_funct="rockylinux"
 build_or_list_images "8 9 10" "8 9 10" "default cloud"
 run_funct="alpine"
-build_or_list_images "3.19 3.20 3.21" "3.19 3.20 3.21" "default cloud"
+# Alpine 3.19 已于 2025-11 EOL，3.22 已于 2025-11 发布
+build_or_list_images "3.20 3.21 3.22" "3.20 3.21 3.22" "default cloud"
 run_funct="openwrt"
 build_or_list_images "23.05 24.10" "23.05 24.10" "default cloud"
 run_funct="oracle"
 build_or_list_images "8 9" "8 9" "default cloud"
 run_funct="fedora"
-# Fedora 42 尚未正式发布（预计 2026-04），暂只构建 41
-build_or_list_images "40 41" "40 41" "default cloud"
+# Fedora 40/41 均已 EOL；Fedora 42 已于 2026-04 发布，当前构建 41/42
+build_or_list_images "41 42" "41 42" "default cloud"
 run_funct="opensuse"
-build_or_list_images "15.6 tumbleweed" "15.6 tumbleweed" "default cloud"
+# openSUSE Leap 15.6 已于 2025-12 EOL，当前使用 15.7
+build_or_list_images "15.7 tumbleweed" "15.7 tumbleweed" "default cloud"
 run_funct="openeuler"
 build_or_list_images "22.03 24.03" "22.03 24.03" "default cloud"
 # 去除重复行
