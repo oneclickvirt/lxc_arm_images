@@ -1422,6 +1422,15 @@ actions:
     systemctl disable iptables || true
     systemctl enable sshd || true
     systemctl enable ssh || true
+    # Install ifupdown2 for PVE LXC network setup, fallback to ifupdown if unavailable
+    if command -v apt-get >/dev/null 2>&1; then
+        apt-get install -y ifupdown2 2>/dev/null || apt-get install -y ifupdown 2>/dev/null || true
+        mkdir -p /etc/network
+        if [ ! -f /etc/network/interfaces ]; then
+            printf 'auto lo\niface lo inet loopback\n' > /etc/network/interfaces
+        fi
+        systemctl enable networking 2>/dev/null || true
+    fi
     # sshd_config
     sed -i "s/^#\?\(Port\).*/\1 22/" /etc/ssh/sshd_config || true
     sed -i -E 's/^#?(Port).*/\1 22/' /etc/ssh/sshd_config || true
