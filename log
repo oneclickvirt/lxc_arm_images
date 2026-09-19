@@ -1,4 +1,4 @@
-Fri Sep 18 02:45:50 UTC 2026
+Sat Sep 19 02:45:17 UTC 2026
 ------------------------------------------
 ubuntu_18.04_bionic_arm64_default.tar.xz
 ------------------------------------------
@@ -34,7 +34,13 @@ debian_11_bullseye_arm64_cloud.tar.xz
 ------------------------------------------
 debian_12_bookworm_arm64_default.tar.xz
 ------------------------------------------
+debian_12_bookworm_arm64_cloud.tar.xz
+------------------------------------------
+debian_13_trixie_arm64_default.tar.xz
+------------------------------------------
 debian_13_trixie_arm64_cloud.tar.xz
+------------------------------------------
+kali_latest_kali-rolling_arm64_default.tar.xz
 ------------------------------------------
 kali_latest_kali-rolling_arm64_cloud.tar.xz
 ------------------------------------------
@@ -45,6 +51,10 @@ centos_7_7_arm64_cloud.tar.xz
 centos_8_8-Stream_arm64_default.tar.xz
 ------------------------------------------
 centos_8_8-Stream_arm64_cloud.tar.xz
+------------------------------------------
+centos_9_9-Stream_arm64_default.tar.xz
+------------------------------------------
+centos_9_9-Stream_arm64_cloud.tar.xz
 ------------------------------------------
 almalinux_8_8_arm64_default.tar.xz
 ------------------------------------------
@@ -84,6 +94,8 @@ opensuse_15.5_15.5_arm64_cloud.tar.xz
 ------------------------------------------
 opensuse_tumbleweed_tumbleweed_arm64_default.tar.xz
 ------------------------------------------
+opensuse_tumbleweed_tumbleweed_arm64_cloud.tar.xz
+------------------------------------------
 opensuse_15.6_15.6_arm64_default.tar.xz
 ------------------------------------------
 opensuse_15.6_15.6_arm64_cloud.tar.xz
@@ -104,9 +116,15 @@ alpine_edge_edge_arm64_cloud.tar.xz
 ------------------------------------------
 alpine_3.20_3.20_arm64_cloud.tar.xz
 ------------------------------------------
+alpine_3.21_3.21_arm64_cloud.tar.xz
+------------------------------------------
+alpine_3.22_3.22_arm64_cloud.tar.xz
+------------------------------------------
 alpine_3.23_3.23_arm64_cloud.tar.xz
 ------------------------------------------
 archlinux_current_current_arm64_default.tar.xz
+------------------------------------------
+archlinux_current_current_arm64_cloud.tar.xz
 ------------------------------------------
 gentoo_current_current_arm64_cloud.tar.xz
 ------------------------------------------
@@ -123,6 +141,8 @@ openwrt_23.05_23.05_arm64_default.tar.xz
 openwrt_23.05_23.05_arm64_cloud.tar.xz
 ------------------------------------------
 oracle_8_8_arm64_cloud.tar.xz
+------------------------------------------
+openeuler_22.03_22.03_arm64_default.tar.xz
 ------------------------------------------
 openeuler_22.03_22.03_arm64_cloud.tar.xz
 ------------------------------------------
