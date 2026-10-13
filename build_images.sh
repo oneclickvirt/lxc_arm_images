@@ -112,8 +112,13 @@ build_or_list_images() {
                 elif [[ "$run_funct" == "alpine" ]]; then
                     manager="apk"
                 elif [[ "$run_funct" == "openwrt" ]]; then
+                    # Stable 25.12+ and snapshots use apk; 24.10 and older use opkg.
                     manager="opkg"
-                    [ "${version}" = "snapshot" ] && manager="apk"
+                    if [[ "$version" == "snapshot" || "$version" =~ ^([0-9]+)\. ]]; then
+                        if [[ "$version" == "snapshot" ]] || (( 10#${BASH_REMATCH[1]} >= 25 )); then
+                            manager="apk"
+                        fi
+                    fi
                 elif [[ "$run_funct" == "gentoo" ]]; then
                     manager="portage"
                 elif [[ "$run_funct" == "opensuse" ]]; then
@@ -139,18 +144,10 @@ build_or_list_images() {
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
                     EXTRA_ARGS="-o source.variant=boot"
-                    # Rocky Linux 10 GPG key 名称变更，跳过 ISO 来源验证
-                    if [ "$version" = "10" ]; then
-                        EXTRA_ARGS="$EXTRA_ARGS -o source.skip_verification=true"
-                    fi
                 elif [[ "$run_funct" == "almalinux" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
                     EXTRA_ARGS="-o source.variant=boot"
-                    # AlmaLinux 10 GPG key 名称变更，跳过 ISO 来源验证
-                    if [ "$version" = "10" ]; then
-                        EXTRA_ARGS="$EXTRA_ARGS -o source.skip_verification=true"
-                    fi
                 elif [[ "$run_funct" == "oracle" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
@@ -159,8 +156,7 @@ build_or_list_images() {
                     [ "${arch}" = "amd64" ] && arch="x86_64"
                     [ "${arch}" = "arm64" ] && arch="aarch64"
                     if [ "${arch}" != "amd64" ] && [ "${arch}" != "i386" ] && [ "${arch}" != "x86_64" ]; then
-                        # archlinuxarm.org 仅支持 HTTP，需跳过 GPG 验证
-                        EXTRA_ARGS="-o source.url=http://os.archlinuxarm.org -o source.skip_verification=true"
+                        EXTRA_ARGS="-o source.url=http://os.archlinuxarm.org"
                     fi
                 elif [[ "$run_funct" == "alpine" ]]; then
                     [ "${arch}" = "amd64" ] && arch="x86_64"
@@ -310,10 +306,13 @@ alpine)
     build_or_list_images "3.20 3.21 3.22" "3.20 3.21 3.22" "default cloud"
     ;;
 openwrt)
-    build_or_list_images "23.05 24.10" "23.05 24.10" "default cloud"
+    # Frozen supported lines survive Jenkins catalog failures. The official
+    # downloader resolves each stable line to its latest signed service release.
+    build_or_list_images "24.10 25.12 snapshot" "24.10 25.12 snapshot" "default cloud"
     ;;
+
 oracle)
-    build_or_list_images "8 9" "8 9" "default cloud"
+    build_or_list_images "8 9 10" "8 9 10" "default cloud"
     ;;
 fedora)
     # Fedora 40/41 均已 EOL；Fedora 42 已于 2026-04 发布，当前构建 41/42
