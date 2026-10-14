@@ -20,6 +20,8 @@ alpine_3.24_3.24_arm64_default.tar.xz
 alpine_edge_edge_arm64_cloud.tar.xz
 archlinux_current_current_arm64_cloud.tar.xz
 archlinux_current_current_arm64_default.tar.xz
+centos_10_10-Stream_arm64_cloud.tar.xz
+centos_10_10-Stream_arm64_default.tar.xz
 centos_7_7_arm64_cloud.tar.xz
 centos_7_7_arm64_default.tar.xz
 centos_8_8-Stream_arm64_cloud.tar.xz
@@ -42,6 +44,10 @@ fedora_39_39_arm64_cloud.tar.xz
 fedora_39_39_arm64_default.tar.xz
 fedora_40_40_arm64_cloud.tar.xz
 fedora_40_40_arm64_default.tar.xz
+fedora_43_43_arm64_cloud.tar.xz
+fedora_43_43_arm64_default.tar.xz
+fedora_44_44_arm64_cloud.tar.xz
+fedora_44_44_arm64_default.tar.xz
 gentoo_current_current_arm64_cloud.tar.xz
 gentoo_current_current_arm64_openrc.tar.xz
 gentoo_current_current_arm64_systemd.tar.xz
