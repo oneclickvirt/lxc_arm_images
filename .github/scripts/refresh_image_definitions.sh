@@ -116,7 +116,7 @@ sed -i "/- xz/ a\\$insert_content_1" fedora.yaml
 sed -i '/^    - fipscheck$/d' fedora.yaml
 # 将 Koji 源地址改为 Fedora 官方直连地址，解决 fedora-http 下载器在新版本上报
 # "Unable to find latest build" 的问题
-sed -i 's|url: https://kojipkgs.fedoraproject.org|url: https://dl.fedoraproject.org/pub/fedora/linux/releases|g' fedora.yaml
+# Preserve Koji's package-tree source; image_source_compat.py also checks it.
 
 # alpine
 rm -rf alpine.yaml
