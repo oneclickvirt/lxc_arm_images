@@ -7,7 +7,7 @@
       "arch": "arm64",
       "kind": "container",
       "reason": "Guest outbound HTTPS routing failed validation; previous assets retained and manual repair remains available",
-      "evidence": "https://github.com/oneclickvirt/lxc_arm_images/actions/runs/38663178807"
+      "evidence": "https://github.com/oneclickvirt/lxc_arm_images/actions/runs/38664906622"
     }
   ]
 }
