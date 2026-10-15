@@ -81,7 +81,12 @@ openwrt_25.12_25.12_arm64_cloud.tar.xz
 openwrt_25.12_25.12_arm64_default.tar.xz
 openwrt_snapshot_snapshot_arm64_cloud.tar.xz
 openwrt_snapshot_snapshot_arm64_default.tar.xz
+oracle_10_10_arm64_cloud.tar.xz
+oracle_10_10_arm64_default.tar.xz
 oracle_8_8_arm64_cloud.tar.xz
+oracle_8_8_arm64_default.tar.xz
+oracle_9_9_arm64_cloud.tar.xz
+oracle_9_9_arm64_default.tar.xz
 rockylinux_10_10_arm64_cloud.tar.xz
 rockylinux_10_10_arm64_default.tar.xz
 rockylinux_8_8_arm64_cloud.tar.xz
@@ -100,3 +105,5 @@ ubuntu_23.10_mantic_arm64_cloud.tar.xz
 ubuntu_23.10_mantic_arm64_default.tar.xz
 ubuntu_24.04_noble_arm64_cloud.tar.xz
 ubuntu_24.04_noble_arm64_default.tar.xz
+ubuntu_26.04_resolute_arm64_cloud.tar.xz
+ubuntu_26.04_resolute_arm64_default.tar.xz
