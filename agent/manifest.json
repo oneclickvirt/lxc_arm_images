@@ -1,0 +1,11 @@
+{
+  "repository": "oneclickvirt/lxc_arm_images",
+  "skill_name": "oneclickvirt-lxc-arm-images",
+  "mcp": true,
+  "files": {
+    "agent/profile.json": "f7bfb9f16ef02758f07cba5dfac0bf6daab6ab9d9b283123af9e7ffc78b279e6",
+    "skills/oneclickvirt-lxc-arm-images/SKILL.md": "466f6aa5de28b960a0e84f0c35d9419fea035d9c8a051224e3c5696bda0879e2",
+    "skills/oneclickvirt-lxc-arm-images/SKILL_ZH.md": "f89fe01068d0aea2243ef39268ed958b78f473ce7f263e786cffe90379f1d9eb",
+    "agent/server.py": "d01416e6194095d90bf0d49ea29f7122969f0b74cf4d74ed0b1ce78753423a7d"
+  }
+}
